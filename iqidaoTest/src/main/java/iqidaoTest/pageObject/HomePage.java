@@ -3,6 +3,7 @@ package iqidaoTest.pageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+//http://101.132.45.64/home
 public class HomePage extends BasePage{
 	
 	public HomePage(WebDriver driver, String url){
