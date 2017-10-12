@@ -35,9 +35,9 @@ public class CreateActivityPage extends BasePage{
 	By activitySignupEndTimeLocator = By.name("signupEndTime");
 	By activityStartTimeLocator = By.name("startTime");
 	By activityEndTimeLocator = By.name("endTime");
-	By enableSignupLocator = By.name("enableSignup");
-	By enableOnlineLocator = By.name("online");
-	
+	By enableSignupLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[4]/div/label/span");
+	By enableOnlineLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[5]/div/label/span");
+	By submitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[2]/button");
 	
 	public WebElement getActivityNameTextField(){
 		return this.dr.findElement(activityNameLocator);
@@ -112,6 +112,10 @@ public class CreateActivityPage extends BasePage{
 		return this.dr.findElement(enableOnlineLocator);
 	}
 	
+	public WebElement getSubmitButton() {
+		return this.dr.findElement(submitButtonLocator);
+	}
+	
 	
 	public ActivitysListPage createActivity(String activityName, String teacherName, String signupCount, String lowduan, String price, String redirectPageUrl){
 		this.getActivityNameTextField().sendKeys(activityName);
@@ -126,12 +130,17 @@ public class CreateActivityPage extends BasePage{
 		this.getLowduanTextField().sendKeys(lowduan);
 		this.getSignupCountTextField().sendKeys(signupCount);
 		this.getActivityPriceTextField().sendKeys(price);
+		this.getSignupStartTimeTextField().clear();
 		this.getSignupStartTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 9, 0, 0));
+		this.getSignupEndTimeTextField().clear();
 		this.getSignupEndTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 16, 23, 59));
+		this.getStartTimeTextField().clear();
 		this.getStartTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 17, 0, 0));
+		this.getEndTimeTextField().clear();
 		this.getEndTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 31, 23, 59));
 		this.getEnableSignupButton().click();
 		this.getEnableOnlineButton().click();
+		this.getSubmitButton().click();
 		return new ActivitysListPage(this.dr, redirectPageUrl);
 	}
 	

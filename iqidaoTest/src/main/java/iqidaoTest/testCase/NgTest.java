@@ -32,24 +32,6 @@ public class NgTest {
 		this.driver = new ChromeDriver();
 	}
 	
-	//前台登录
-	@Ignore
-	@Test
-	public void testLogin(){
-		String userName = "186186";
-		String passWord = "111111";
-		String url = "http://101.132.45.64/";
-		String redirectPageUrl = "http://101.132.45.64/home";
-		String expectedResult = "学习中心";
-		//登录
-		LoginPage login = new LoginPage(this.driver, url);
-		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
-		
-		//检查登录结果
-		String actualResult = homePage.getTitleText();
-//		System.out.println(actualResult);
-		assertTrue(actualResult.contains(expectedResult));
-	}
 	
 	//后台登录
 	@Test
@@ -73,7 +55,7 @@ public class NgTest {
 	
 	@Test(dependsOnMethods = {"adminLogin"})
 	public void createActivity(){
-		String activityName = "zltest" + CommonUtils.DatetoString(new Date());
+		String activityName = "zltest";
 		String teacherName = "zl老师00";
 		String signupCount = "10";
 		String lowduan = "-4";

@@ -8,14 +8,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import iqidaoTest.Utils.CommonUtils;
 import iqidaoTest.pageObject.ActivitysListPage;
 import iqidaoTest.pageObject.AdminHomePage;
 import iqidaoTest.pageObject.AdminLoginPage;
+import iqidaoTest.pageObject.BasePage;
 import iqidaoTest.pageObject.CreateActivityPage;
+import iqidaoTest.pageObject.CreateSeasonPage;
 import iqidaoTest.pageObject.HomePage;
 import iqidaoTest.pageObject.LoginPage;
 
@@ -50,7 +55,7 @@ public class TestLogin {
 	
 	//后台登录
 	@Test
-	public void adminLogin(){
+	public void adminLogin() throws InterruptedException{
 		String userName = "186186";
 		String passWord = "111111";
 		String url = "http://101.132.45.64/admin001";
@@ -60,15 +65,36 @@ public class TestLogin {
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, url);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, redirectPageUrl);
 		this.driver.manage().window().maximize();
-		String actualResult = adminHomePage.getTitleText();
-		System.out.println(actualResult);
+//		String actualResult = adminHomePage.getTitleText();
+//		System.out.println(actualResult);
+//		
+//		assertTrue(actualResult.contains(expectedResult));
 		
-		assertTrue(actualResult.contains(expectedResult));
+//		this.driver.get("http://101.132.45.64/admin001/activities");
+//		for(int row = 1; row < 21; row++) {
+//			WebElement activityName = this.driver.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[3]"));
+//			if(activityName.getText().contains("性能一千人")) {
+//				activityName.click();
+//				break;
+//			}
+//		}
+		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, "http://101.132.45.64/admin001/activities");
+		BasePage basePage = activitysListPage.getActivityByName("性能一千人");
+		if(basePage instanceof CreateSeasonPage) {
+			CreateSeasonPage createSeasonPage = (CreateSeasonPage)basePage;
+		}else {
+			System.out.println("can not find activity");
+		}
+		Thread.sleep(5000);
+
+
+	    
+	    
 	}
 	
 
 	
-	@Test
+//	@Test
 	public void createActivity(){
 		String activityName = "zltest" + CommonUtils.DatetoString(new Date());
 		String teacherName = "zl老师00";
