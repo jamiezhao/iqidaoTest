@@ -70,26 +70,12 @@ public class TestLogin {
 //		
 //		assertTrue(actualResult.contains(expectedResult));
 		
-//		this.driver.get("http://101.132.45.64/admin001/activities");
-//		for(int row = 1; row < 21; row++) {
-//			WebElement activityName = this.driver.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[3]"));
-//			if(activityName.getText().contains("性能一千人")) {
-//				activityName.click();
-//				break;
-//			}
-//		}
+		
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, "http://101.132.45.64/admin001/activities");
-		BasePage basePage = activitysListPage.getActivityByName("性能一千人");
-		if(basePage instanceof CreateSeasonPage) {
-			CreateSeasonPage createSeasonPage = (CreateSeasonPage)basePage;
-		}else {
-			System.out.println("can not find activity");
-		}
-		Thread.sleep(5000);
-
-
-	    
-	    
+		String activityUrl = activitysListPage.getActivityUrlByName("性能一千人");
+		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, activityUrl);
+		createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
+		createSeasonPage.addCourceItem("zlcourse", "2017-10-13 00:00", "C:\\工作目录\\K级官子第1课时——研发完成.doc");
 	}
 	
 

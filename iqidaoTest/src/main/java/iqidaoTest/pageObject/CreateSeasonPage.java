@@ -14,18 +14,18 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	By addSeasonButtonLocator = By.linkText("添加赛季");
-	By seasonNameLocator = By.xpath("//*[@id=\\\"add-match\\\"]/div[2]/div[1]/input");
-	By seasonPriceLocator = By.xpath("//*[@id=\"add-match\"]/div[2]/div[2]/input");
-	By seasonStartTimeLocator = By.xpath("//*[@id=\"add-match\"]/div[2]/div[3]/input");
-	By seasonEndTimeLocator = By.xpath("//*[@id=\"add-match\"]/div[2]/div[4]/input");
-	By seasonSubmitButtonLocator = By.xpath("//*[@id=\"add-match\"]/div[3]/button[1]");
+	By seasonNameLocator = By.xpath(".//*[@id='add-match']/div[2]/div[1]/input");
+	By seasonPriceLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[2]/input");
+	By seasonStartTimeLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[3]/input");
+	By seasonEndTimeLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[4]/input");
+	By seasonSubmitButtonLocator = By.xpath(".//*[@id=\"add-match\"]/div[3]/button[1]");
 	
 	By addItemButtonLocator = By.linkText("添加条目");
-	By itemNameLocator = By.xpath("//*[@id=\"add-course\"]/div[2]/div/div[1]/div/input");
-	By itemStartTimeLocator = By.xpath("//*[@id=\"add-course\"]/div[2]/div/div[2]/div/input");
+	By itemNameLocator = By.xpath(".//*[@id='add-course']/div[2]/div/div[1]/div/input");
+	By itemStartTimeLocator = By.xpath(".//*[@id=\"add-course\"]/div[2]/div/div[2]/div/input");
 	By itemTypeLocator = By.id("type");
 	By courseSyllabusLocator = By.id("upload_doc");
-	By itemSubmitButtonLocator = By.xpath("//*[@id=\"add-course\"]/div[3]/button[2]");
+	By itemSubmitButtonLocator = By.xpath(".//*[@id=\"add-course\"]/div[3]/button[2]");
 	
 	
 	public WebElement getAddSeasonButton() {
@@ -91,27 +91,22 @@ public class CreateSeasonPage extends BasePage{
 		this.getSeasonSubmitButton().click();
 	}
 	
-	/*
-    this.driver.findElement().click();
-  
-  
-    Select select = new Select(this.driver.findElement(By.id("type")));
-    select.selectByValue("0");
-  //*[@id="upload_doc"]
-    this.driver.findElement(By.id("upload_doc")).sendKeys("C:\\工作目录\\K级官子第1课时——研发完成.doc");
-	*/
 	
 	public void addCourceItem(String itemName, String itemStartTime, String courseSyllabus) {
+		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+	    this.getAddItemButton().click();
 	    this.getItemNameTextField().sendKeys(itemName);
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 	    Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("0");
+	    this.getcourseSyllabusTextField().sendKeys(courseSyllabus);
 	    this.getItemSubmitButton().click();
 	}
 	
 	public void addExamItem(String itemName, String itemStartTime) {
+		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 	    this.getItemNameTextField().sendKeys(itemName);
@@ -120,12 +115,6 @@ public class CreateSeasonPage extends BasePage{
 	    select.selectByValue("1");
 	    this.getItemSubmitButton().click();
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
