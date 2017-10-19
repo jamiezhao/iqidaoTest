@@ -19,7 +19,7 @@ public class ActivitysListPage extends BasePage{
 	By createActivityLocator = By.linkText("创建活动");
 	
 	public WebElement getFirstActivityName(){
-		return this.dr.findElement(By.xpath("#activity-list>tbody>tr>td>a"));
+		return this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[1]/td[3]/a"));
 	}
 
 	public String getActivityUrlByName(String activityName) {

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -117,7 +118,7 @@ public class CreateActivityPage extends BasePage{
 	}
 	
 	
-	public ActivitysListPage createActivity(String activityName, String teacherName, String signupCount, String lowduan, String price, String redirectPageUrl){
+	public ActivitysListPage createActivity(String activityName, String teacherName, String signupCount, String lowduan, String price, String signupStartTime, String signupEndTime, String activityStartTime, String activityEndTime, String redirectPageUrl){
 		this.getActivityNameTextField().sendKeys(activityName);
 		this.getActivityUserLimitTextField().sendKeys("10");
 		Select activityVersion = this.getActivityVersionSelect();
@@ -131,13 +132,15 @@ public class CreateActivityPage extends BasePage{
 		this.getSignupCountTextField().sendKeys(signupCount);
 		this.getActivityPriceTextField().sendKeys(price);
 		this.getSignupStartTimeTextField().clear();
-		this.getSignupStartTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 9, 0, 0));
+		this.getSignupStartTimeTextField().sendKeys(signupStartTime);
 		this.getSignupEndTimeTextField().clear();
-		this.getSignupEndTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 16, 23, 59));
+		this.getSignupEndTimeTextField().sendKeys(signupEndTime);
 		this.getStartTimeTextField().clear();
-		this.getStartTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 17, 0, 0));
+		this.getStartTimeTextField().sendKeys(activityStartTime);
 		this.getEndTimeTextField().clear();
-		this.getEndTimeTextField().sendKeys(CommonUtils.setDays(2017, 10, 31, 23, 59));
+		this.getEndTimeTextField().sendKeys(activityEndTime);
+		JavascriptExecutor js = (JavascriptExecutor) this.dr;
+	    js.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
 		this.getEnableSignupButton().click();
 		this.getEnableOnlineButton().click();
 		this.getSubmitButton().click();

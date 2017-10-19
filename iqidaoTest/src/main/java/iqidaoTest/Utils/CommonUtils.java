@@ -18,6 +18,15 @@ public class CommonUtils {
 		calendar.set(year, month-1, date, hourOfDay, minute);
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
 	}
+	
+	public static String setDays(int month, int date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(1, month-1);
+		calendar.set(2, date);
+		return new SimpleDateFormat("MMdd").format(calendar.getTime());
+	}
+	
+
 
 //	@Test
 	public void t(){

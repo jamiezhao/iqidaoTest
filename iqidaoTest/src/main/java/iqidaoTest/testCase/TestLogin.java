@@ -2,30 +2,32 @@ package iqidaoTest.testCase;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import iqidaoTest.Utils.CommonUtils;
 import iqidaoTest.pageObject.ActivitysListPage;
 import iqidaoTest.pageObject.AdminHomePage;
 import iqidaoTest.pageObject.AdminLoginPage;
-import iqidaoTest.pageObject.BasePage;
 import iqidaoTest.pageObject.CreateActivityPage;
-import iqidaoTest.pageObject.CreateSeasonPage;
 import iqidaoTest.pageObject.HomePage;
 import iqidaoTest.pageObject.LoginPage;
 
 public class TestLogin {
 	private WebDriver driver;
+	String signupStartTime = CommonUtils.setDays(2017, 10, 1, 00, 00);
+	String signupEndTime = CommonUtils.setDays(2017, 10, 15, 23, 59);
+	String activityStartTime = CommonUtils.setDays(2017, 10, 16, 00, 00);
+	String activityEndTime = CommonUtils.setDays(2017, 10, 30, 23, 59);
+	String activitysListUrl = "http://101.132.45.64/admin001/activities";
 	
 	@Before
 	public void setUp(){
@@ -70,29 +72,51 @@ public class TestLogin {
 //		
 //		assertTrue(actualResult.contains(expectedResult));
 		
+		String activityName = "zltest" + CommonUtils.setDays(10, 18);
+		String teacherName = "zl老师00";
+		String signupCount = "10";
+		String lowduan = "-4";
+		String price = "1000";
+		/*
+		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, "http://101.132.45.64/admin001/activity/post");
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
+		String actualResult = activitysListPage.getFirstActivityName().getText();
+		System.out.println(actualResult);
+		*/
 		
-		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, "http://101.132.45.64/admin001/activities");
+		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		String activityUrl = activitysListPage.getActivityUrlByName("性能一千人");
-		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, activityUrl);
-		createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
-		createSeasonPage.addCourceItem("zlcourse", "2017-10-13 00:00", "C:\\工作目录\\K级官子第1课时——研发完成.doc");
+		this.driver.get(activityUrl);
+		WebElement table = this.driver.findElement(By.id("special-list"));
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		for(WebElement row:rows) {
+			List<WebElement> cols = row.findElements(By.tagName("td"));
+			for(WebElement col:cols) {
+				System.out.println(col.getText());
+			}
+			
+		}
+		
+		
+//		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, activityUrl);
+//		createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
+//		createSeasonPage.addCourceItem("zlcourse", "2017-10-13 00:00", "C:\\工作目录\\K级官子第1课时——研发完成.doc");
 	}
 	
 
 	
 //	@Test
 	public void createActivity(){
-		String activityName = "zltest" + CommonUtils.DatetoString(new Date());
+		String activityName = "zltest";
 		String teacherName = "zl老师00";
-		String signupCount = "10";
+		String signupCount = "0";
 		String lowduan = "-4";
 		String price = "1000";
-		String redirectPageUrl = "http://101.132.45.64/admin001/activities";
 		String url = "http://101.132.45.64/admin001/activity/post";
 		String expectedResult = activityName;
 		
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, url);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, redirectPageUrl);
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
 		String actualResult = activitysListPage.getFirstActivityName().getText();
 		System.out.println(actualResult);
 		

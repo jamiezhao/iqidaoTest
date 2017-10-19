@@ -1,5 +1,7 @@
 package iqidaoTest.pageObject;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +28,6 @@ public class CreateSeasonPage extends BasePage{
 	By itemTypeLocator = By.id("type");
 	By courseSyllabusLocator = By.id("upload_doc");
 	By itemSubmitButtonLocator = By.xpath(".//*[@id=\"add-course\"]/div[3]/button[2]");
-	
 	
 	public WebElement getAddSeasonButton() {
 		return this.dr.findElement(addSeasonButtonLocator);
@@ -76,6 +77,24 @@ public class CreateSeasonPage extends BasePage{
 		return this.dr.findElement(itemSubmitButtonLocator);
 	}
 	
+	public boolean findItemByName(String itemName) {
+		boolean flag = false;
+		WebElement table = this.dr.findElement(By.id("special-list"));
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		for(WebElement row:rows) {
+			List<WebElement> cols = row.findElements(By.tagName("td"));
+			for(WebElement col:cols) {
+				if(col.getText().contains(itemName)) {
+					flag = true;
+					break;
+				}
+			}
+			
+		}
+		return flag; 
+	}
+	
+	
 	public void addActivitySeason(String seasonName, String seasonPrice, String seasonStartTime, String seasonEndTime) {
 		//页面滚动定位到添加赛季的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
@@ -98,6 +117,7 @@ public class CreateSeasonPage extends BasePage{
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 	    this.getAddItemButton().click();
 	    this.getItemNameTextField().sendKeys(itemName);
+	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 	    Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("0");
@@ -110,6 +130,7 @@ public class CreateSeasonPage extends BasePage{
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 	    this.getItemNameTextField().sendKeys(itemName);
+	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 		Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("1");
