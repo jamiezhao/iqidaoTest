@@ -26,7 +26,7 @@ public class adminTestCase {
 	String userName = "186186";
 	String passWord = "111111";
 	//创建活动
-	String activityName = "zltest";
+	String activityName = "zltest" + CommonUtils.setDays(10, 20);
 	String teacherName = "zl老师00";
 	String signupCount = "0";
 	String lowduan = "-4";

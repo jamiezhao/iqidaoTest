@@ -21,8 +21,8 @@ public class CommonUtils {
 	
 	public static String setDays(int month, int date){
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(1, month-1);
-		calendar.set(2, date);
+		calendar.set(2, month-1);
+		calendar.set(5, date);
 		return new SimpleDateFormat("MMdd").format(calendar.getTime());
 	}
 	

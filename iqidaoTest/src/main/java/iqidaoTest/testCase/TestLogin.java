@@ -37,7 +37,6 @@ public class TestLogin {
 	}
 	
 	//前台登录
-	@Ignore
 	@Test
 	public void testLogin(){
 		String userName = "186186";
@@ -49,13 +48,29 @@ public class TestLogin {
 		LoginPage login = new LoginPage(this.driver, url);
 		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
 		
+		List<WebElement> trains = this.driver.findElements(By.tagName("ul"));
+		for(WebElement train : trains) {
+			System.out.println(train.findElement(By.tagName("li")).getText());
+		}
+		
+		
+		
 		//检查登录结果
 		String actualResult = homePage.getTitleText();
 //		System.out.println(actualResult);
 		assertTrue(actualResult.contains(expectedResult));
 	}
 	
+//	@Test
+	public void buyTraining() {
+		
+		this.driver.findElement(By.tagName("ul"));
+	}
+	
+	
+	
 	//后台登录
+	@Ignore
 	@Test
 	public void adminLogin() throws InterruptedException{
 		String userName = "186186";
@@ -104,8 +119,8 @@ public class TestLogin {
 	}
 	
 
-	
-//	@Test
+	@Ignore
+	@Test
 	public void createActivity(){
 		String activityName = "zltest";
 		String teacherName = "zl老师00";
