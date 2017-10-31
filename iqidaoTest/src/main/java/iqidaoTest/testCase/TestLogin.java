@@ -9,17 +9,18 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import iqidaoTest.Utils.CommonUtils;
-import iqidaoTest.pageObject.ActivitysListPage;
-import iqidaoTest.pageObject.AdminHomePage;
-import iqidaoTest.pageObject.AdminLoginPage;
-import iqidaoTest.pageObject.CreateActivityPage;
-import iqidaoTest.pageObject.HomePage;
-import iqidaoTest.pageObject.LoginPage;
+import iqidaoTest.adminPageObject.ActivitysListPage;
+import iqidaoTest.adminPageObject.AdminHomePage;
+import iqidaoTest.adminPageObject.AdminLoginPage;
+import iqidaoTest.adminPageObject.CreateActivityPage;
+import iqidaoTest.frontPageObject.HomePage;
+import iqidaoTest.frontPageObject.LoginPage;
 
 public class TestLogin {
 	private WebDriver driver;
@@ -41,24 +42,38 @@ public class TestLogin {
 	public void testLogin(){
 		String userName = "186186";
 		String passWord = "111111";
-		String url = "http://101.132.45.64/";
-		String redirectPageUrl = "http://101.132.45.64/home";
+		String url = "http://testing.iqidao.com/";
+		String redirectPageUrl = "http://testing.iqidao.com/home";
 		String expectedResult = "学习中心";
 		//登录
 		LoginPage login = new LoginPage(this.driver, url);
 		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
+		this.driver.manage().window().maximize();
+		this.driver.get("http://testing.iqidao.com/trainings");
+		WebElement ul = this.driver.findElement(By.className("item-list"));
+		List<WebElement> lis = ul.findElements(By.className("training-item")); 
+		for(WebElement li:lis) {
+			if(li.findElement(By.className("title")).getText().contains("zlautoTest")) {
+				System.out.println("find it");
+				JavascriptExecutor js = (JavascriptExecutor) this.driver;
+			    js.executeScript("arguments[0].scrollIntoView(true);", li.findElement(By.className("title")));
+				li.findElement(By.className("thumb")).click();
+			}
+		}
 		
+		/*
 		List<WebElement> trains = this.driver.findElements(By.tagName("ul"));
 		for(WebElement train : trains) {
 			System.out.println(train.findElement(By.tagName("li")).getText());
 		}
-		
-		
-		
 		//检查登录结果
 		String actualResult = homePage.getTitleText();
-//		System.out.println(actualResult);
 		assertTrue(actualResult.contains(expectedResult));
+		*/
+		
+		
+		
+		
 	}
 	
 //	@Test

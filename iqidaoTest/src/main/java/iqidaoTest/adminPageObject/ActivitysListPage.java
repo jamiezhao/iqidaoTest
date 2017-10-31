@@ -1,4 +1,4 @@
-package iqidaoTest.pageObject;
+package iqidaoTest.adminPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,13 +19,13 @@ public class ActivitysListPage extends BasePage{
 	By createActivityLocator = By.linkText("创建活动");
 	
 	public WebElement getFirstActivityName(){
-		return this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[1]/td[3]/a"));
+		return this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[1]/td[4]/a"));
 	}
 
 	public String getActivityUrlByName(String activityName) {
 		boolean flag = false; 
 		for(int row = 1; row < 21; row++) {
-			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[3]"));
+			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
 			if(actualActivityName.getText().contains(activityName)) {
 				flag = true;
 				actualActivityName.click();

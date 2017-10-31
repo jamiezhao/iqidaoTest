@@ -1,4 +1,4 @@
-package iqidaoTest.pageObject;
+package iqidaoTest.adminPageObject;
 
 import org.openqa.selenium.WebDriver;
 

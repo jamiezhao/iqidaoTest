@@ -1,4 +1,4 @@
-package iqidaoTest.pageObject;
+package iqidaoTest.adminPageObject;
 
 
 import java.util.Date;
@@ -36,9 +36,11 @@ public class CreateActivityPage extends BasePage{
 	By activitySignupEndTimeLocator = By.name("signupEndTime");
 	By activityStartTimeLocator = By.name("startTime");
 	By activityEndTimeLocator = By.name("endTime");
-	By enableSignupLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[4]/div/label/span");
-	By enableOnlineLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[5]/div/label/span");
+	By enableSignupLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[4]/div/div/label/span");
+	By enableOnlineLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[5]/div/div/label/span");
+	By enableCouponLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[6]/div/div/label/span");
 	By submitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[2]/button");
+									   
 	
 	public WebElement getActivityNameTextField(){
 		return this.dr.findElement(activityNameLocator);
@@ -113,6 +115,10 @@ public class CreateActivityPage extends BasePage{
 		return this.dr.findElement(enableOnlineLocator);
 	}
 	
+	public WebElement getEnableCouponButton() {
+		return this.dr.findElement(enableCouponLocator);
+	}
+	
 	public WebElement getSubmitButton() {
 		return this.dr.findElement(submitButtonLocator);
 	}
@@ -143,6 +149,7 @@ public class CreateActivityPage extends BasePage{
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
 		this.getEnableSignupButton().click();
 		this.getEnableOnlineButton().click();
+		this.getEnableCouponButton().click();
 		this.getSubmitButton().click();
 		return new ActivitysListPage(this.dr, redirectPageUrl);
 	}

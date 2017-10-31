@@ -1,8 +1,10 @@
-package iqidaoTest.pageObject;
+package iqidaoTest.frontPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import iqidaoTest.adminPageObject.BasePage;
 
 //http://101.132.45.64/home
 public class HomePage extends BasePage{

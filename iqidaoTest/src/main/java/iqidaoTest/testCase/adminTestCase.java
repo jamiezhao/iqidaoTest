@@ -9,24 +9,24 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import iqidaoTest.Utils.CommonUtils;
-import iqidaoTest.pageObject.ActivitysListPage;
-import iqidaoTest.pageObject.AdminHomePage;
-import iqidaoTest.pageObject.AdminLoginPage;
-import iqidaoTest.pageObject.CreateActivityPage;
-import iqidaoTest.pageObject.CreateSeasonPage;
+import iqidaoTest.adminPageObject.ActivitysListPage;
+import iqidaoTest.adminPageObject.AdminHomePage;
+import iqidaoTest.adminPageObject.AdminLoginPage;
+import iqidaoTest.adminPageObject.CreateActivityPage;
+import iqidaoTest.adminPageObject.CreateSeasonPage;
 
 public class adminTestCase {
 	private WebDriver driver;
 	//页面URL
-	String adminLoginUrl = "http://101.132.45.64/admin001";
-	String adminHomeUrl = "http://101.132.45.64/admin001/home";
-	String createActivityUrl = "http://101.132.45.64/admin001/activity/post";
-	String activitysListUrl = "http://101.132.45.64/admin001/activities";
+	String adminLoginUrl = "http://testing.iqidao.com/admin001";
+	String adminHomeUrl = "http://testing.iqidao.com/admin001/home";
+	String createActivityUrl = "http://testing.iqidao.com/admin001/activity/post";
+	String activitysListUrl = "http://testing.iqidao.com/admin001/activities";
 	//登录
 	String userName = "186186";
 	String passWord = "111111";
 	//创建活动
-	String activityName = "zltest" + CommonUtils.setDays(10, 20);
+	String activityName = "zlautoTest";
 	String teacherName = "zl老师00";
 	String signupCount = "0";
 	String lowduan = "-4";
