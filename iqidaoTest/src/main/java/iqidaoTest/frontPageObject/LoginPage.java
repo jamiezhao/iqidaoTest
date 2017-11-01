@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import iqidaoTest.adminPageObject.BasePage;
 
@@ -45,7 +47,7 @@ public class LoginPage extends BasePage{
 
 	public HomePage login(String userName, String passWord, String redirectPageUrl){
 		this.getLoginTable().click();
-		this.dr.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		new WebDriverWait(this.dr, 5).until(ExpectedConditions.presenceOfElementLocated(usernameLocator));
 		this.getUsernameTextField().sendKeys(userName);
 		this.dr.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		this.getPasswordTextField().sendKeys(passWord);		

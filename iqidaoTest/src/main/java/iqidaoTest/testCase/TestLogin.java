@@ -19,6 +19,7 @@ import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
 import iqidaoTest.adminPageObject.CreateActivityPage;
+import iqidaoTest.frontPageObject.ActivitysPage;
 import iqidaoTest.frontPageObject.HomePage;
 import iqidaoTest.frontPageObject.LoginPage;
 
@@ -28,38 +29,33 @@ public class TestLogin {
 	String signupEndTime = CommonUtils.setDays(2017, 10, 15, 23, 59);
 	String activityStartTime = CommonUtils.setDays(2017, 10, 16, 00, 00);
 	String activityEndTime = CommonUtils.setDays(2017, 10, 30, 23, 59);
-	String activitysListUrl = "http://101.132.45.64/admin001/activities";
+	String activitysListUrl = "http://testing.iqidao.com/trainings";
+	String url = "http://testing.iqidao.com/";
+	String userName = "186186";
+	String passWord = "111111";
+	
 	
 	@Before
 	public void setUp(){
 //		this.driver = new FirefoxDriver();
 		System.setProperty("webdriver.chrome.driver", "C:\\工作目录\\autoTest\\chromedriver.exe");
 		this.driver = new ChromeDriver();
+		this.driver.manage().window().maximize();
 	}
 	
 	//前台登录
 	@Test
 	public void testLogin(){
-		String userName = "186186";
-		String passWord = "111111";
-		String url = "http://testing.iqidao.com/";
+		
 		String redirectPageUrl = "http://testing.iqidao.com/home";
 		String expectedResult = "学习中心";
 		//登录
 		LoginPage login = new LoginPage(this.driver, url);
 		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
-		this.driver.manage().window().maximize();
-		this.driver.get("http://testing.iqidao.com/trainings");
-		WebElement ul = this.driver.findElement(By.className("item-list"));
-		List<WebElement> lis = ul.findElements(By.className("training-item")); 
-		for(WebElement li:lis) {
-			if(li.findElement(By.className("title")).getText().contains("zlautoTest")) {
-				System.out.println("find it");
-				JavascriptExecutor js = (JavascriptExecutor) this.driver;
-			    js.executeScript("arguments[0].scrollIntoView(true);", li.findElement(By.className("title")));
-				li.findElement(By.className("thumb")).click();
-			}
-		}
+		
+		ActivitysPage activitysPage = new ActivitysPage(this.driver, activitysListUrl);
+		activitysPage.gotoActivityDetailPageByName("zlautoTest");
+
 		
 		/*
 		List<WebElement> trains = this.driver.findElements(By.tagName("ul"));

@@ -2,7 +2,7 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="iqidaoTest.testCase.NgTest"/>
+      <class name="iqidaoTest.testCase.adminTestCase"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
