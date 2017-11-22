@@ -1,8 +1,8 @@
 package iqidaoTest.adminPageObject;
 
 
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,8 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import iqidaoTest.Utils.CommonUtils;
 
 //http://101.132.45.64/admin001/activity/post
 public class CreateActivityPage extends BasePage{
@@ -145,12 +143,15 @@ public class CreateActivityPage extends BasePage{
 		this.getStartTimeTextField().sendKeys(activityStartTime);
 		this.getEndTimeTextField().clear();
 		this.getEndTimeTextField().sendKeys(activityEndTime);
-		JavascriptExecutor js = (JavascriptExecutor) this.dr;
-	    js.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
+		JavascriptExecutor js1 = (JavascriptExecutor) this.dr;
+	    js1.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
 		this.getEnableSignupButton().click();
 		this.getEnableOnlineButton().click();
 		this.getEnableCouponButton().click();
+		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
+	    js2.executeScript("arguments[0].scrollIntoView(true);", this.getSubmitButton());
 		this.getSubmitButton().click();
+		this.dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return new ActivitysListPage(this.dr, redirectPageUrl);
 	}
 	

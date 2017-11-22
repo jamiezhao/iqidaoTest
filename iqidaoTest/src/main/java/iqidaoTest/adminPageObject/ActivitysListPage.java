@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 //http://101.132.45.64/admin001/activities
 public class ActivitysListPage extends BasePage{
+	private int activitiesTableRows = 20;
 	public ActivitysListPage(WebDriver driver, String url){
 		super(driver);
 		this.url = url;
@@ -24,7 +25,7 @@ public class ActivitysListPage extends BasePage{
 
 	public String getActivityUrlByName(String activityName) {
 		boolean flag = false; 
-		for(int row = 1; row < 21; row++) {
+		for(int row = 1; row < activitiesTableRows + 1; row++) {
 			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
 			if(actualActivityName.getText().contains(activityName)) {
 				flag = true;
@@ -39,6 +40,25 @@ public class ActivitysListPage extends BasePage{
 			return "can not find the activity";
 		}
 		
+	}
+	
+	public String getActivityUsersUrlByName(String activityName) {
+		boolean flag = false; 
+		for(int row = 1; row < activitiesTableRows + 1; row++) {
+			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
+			WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]"));
+			if(actualActivityName.getText().contains(activityName)) {
+				flag = true;
+				activityUsers.click();
+				break;
+			}
+		}
+		if(flag) {
+			String currentUrl = this.dr.getCurrentUrl();
+			return currentUrl;
+		}else {
+			return "can not find the activity";
+		}
 	}
 	
 
