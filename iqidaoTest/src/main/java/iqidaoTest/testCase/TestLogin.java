@@ -9,14 +9,17 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import iqidaoTest.Utils.CommonUtils;
-import iqidaoTest.adminPageObject.ActivityUsersPage;
+import iqidaoTest.Utils.SwitchToWindow;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
 import iqidaoTest.adminPageObject.CreateActivityPage;
-import iqidaoTest.adminPageObject.UserCouponsPage;
+import iqidaoTest.adminPageObject.UsersListPage;
+import iqidaoTest.frontPageObject.ActivityDetailPage;
 import iqidaoTest.frontPageObject.ActivitysPage;
 import iqidaoTest.frontPageObject.HomePage;
 import iqidaoTest.frontPageObject.LoginPage;
@@ -30,14 +33,25 @@ public class TestLogin {
 	String activitysListUrl = "http://testing.iqidao.com/admin001/activities";
 	String activityUsersListUrl = "http://testing.iqidao.com/admin001/activity/users?activityId=234";
 	String userCouponListUrl = "http://testing.iqidao.com/admin001/coupon/user";
+	String usersListUrl = "http://testing.iqidao.com/admin001/users";
+	String traninsListUrl = "http://testing.iqidao.com/trainings";
 	String url = "http://testing.iqidao.com/";
-	String userName = "186186";
+	String mytrainsUrl = "http://testing.iqidao.com/mytrainings";
+	String userName = "13811460080";
 	String passWord = "111111";
 	//发放用户优惠券
 	String couponUserName = "zl棋手80";
 	String couponPrice = "1";
 	String couponStartTime = CommonUtils.setDays(2017, 1, 1, 00, 00);
 	String couponEndTime = CommonUtils.setDays(2017, 12, 31, 23, 59);
+	//添加用户
+	String userRealName = "zltest";
+	String mobilePhone = "11111111111";	//专属测试手机号
+	String uesrGroup = "100"; 	//100为客服身份
+	String userPassword = "111111";
+	//购买活动
+	String activityName = "分数检查";
+	
 	
 	@Before
 	public void setUp(){
@@ -48,19 +62,50 @@ public class TestLogin {
 	}
 	
 	//前台登录
-	@Ignore
 	@Test
 	public void testLogin(){
-		
 		String redirectPageUrl = "http://testing.iqidao.com/home";
 		String expectedResult = "学习中心";
 		//登录
 		LoginPage login = new LoginPage(this.driver, url);
 		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
 		
-		ActivitysPage activitysPage = new ActivitysPage(this.driver, activitysListUrl);
-		activitysPage.gotoActivityDetailPageByName("zlautoTest");
-
+		ActivitysPage activitysPage = new ActivitysPage(this.driver, traninsListUrl);
+		boolean result = activitysPage.gotoActivityDetailPageByName("分数检查");
+		if(result) {
+			boolean flag = SwitchToWindow.changeWindow(this.driver, "分数检查");
+			if(flag) {
+				String activityDetailUrl = this.driver.getCurrentUrl();
+				System.out.println(activityDetailUrl);
+				ActivityDetailPage activityDetailPage = new ActivityDetailPage(this.driver, activityDetailUrl);
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				activityDetailPage.buyActivityByCoupon(activityName, mytrainsUrl);
+			}
+			
+		}
+//		new WebDriverWait(this.driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".btn.btn-lg.btn-danger.pay-btn")));
+			
+		
+		
+		/*
+		while(true) {
+			ActivitysPage activitysPage = new ActivitysPage(this.driver, activitysListUrl);
+			boolean flag = activitysPage.gotoActivityDetailPageByName("zl0821双师测性能");
+			if(!flag) {
+				String activitysListUrl = activitysPage.goNextPage();
+			}else {
+				
+			}
+			
+		}
+		*/
+		
+		
+		
 		
 		/*
 		List<WebElement> trains = this.driver.findElements(By.tagName("ul"));
@@ -83,6 +128,7 @@ public class TestLogin {
 	
 	
 	//后台登录
+	@Ignore
 	@Test
 	public void adminLogin() throws InterruptedException{
 		String userName = "186186";
@@ -113,8 +159,11 @@ public class TestLogin {
 		
 	
 		
-		UserCouponsPage userCouponsPage = new UserCouponsPage(this.driver, userCouponListUrl);
-		userCouponsPage.addUserCoupon(couponUserName, couponPrice, couponStartTime, couponEndTime);
+//		UserCouponsPage userCouponsPage = new UserCouponsPage(this.driver, userCouponListUrl);
+//		userCouponsPage.addUserCoupon(couponUserName, couponPrice, couponStartTime, couponEndTime);
+		
+		UsersListPage usersListPage = new UsersListPage(this.driver, usersListUrl);
+		usersListPage.addUser(userRealName,mobilePhone,uesrGroup,userPassword);
 		
 		/*
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);

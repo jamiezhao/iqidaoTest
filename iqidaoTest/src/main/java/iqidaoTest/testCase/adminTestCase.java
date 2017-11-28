@@ -53,6 +53,12 @@ public class adminTestCase {
 	String couponPrice = "1";
 	String couponStartTime = CommonUtils.setDays(2017, 1, 1, 00, 00);
 	String couponEndTime = CommonUtils.setDays(2017, 12, 31, 23, 59);
+	//添加用户
+	String userRealName = "zltest";
+	String mobilePhone = "11111111111";	//专属测试手机号
+	String uesrGroup = "100"; 	//100为客服身份
+	String userPassword = "111111";
+	
 	
 	
 	@BeforeTest
@@ -132,6 +138,13 @@ public class adminTestCase {
 		boolean result = userCouponsPage.checkFirstUserCoupon(couponUserName);
 		AssertJUnit.assertTrue(result);
 	}
+	
+	//添加用户
+	@Test
+	public void addUser() {
+		
+	}
+	
 	
 	@AfterTest
 	public void afterTest() {

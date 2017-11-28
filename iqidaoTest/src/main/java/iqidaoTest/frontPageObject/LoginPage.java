@@ -3,6 +3,7 @@ package iqidaoTest.frontPageObject;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -47,12 +48,23 @@ public class LoginPage extends BasePage{
 
 	public HomePage login(String userName, String passWord, String redirectPageUrl){
 		this.getLoginTable().click();
-		new WebDriverWait(this.dr, 5).until(ExpectedConditions.presenceOfElementLocated(usernameLocator));
-		this.getUsernameTextField().sendKeys(userName);
-		this.dr.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		this.getPasswordTextField().sendKeys(passWord);		
-		this.getCaptchaTextField().sendKeys(CAPTCHA);
+		new WebDriverWait(this.dr, 15).until(ExpectedConditions.presenceOfElementLocated(usernameLocator));
+//		this.getUsernameTextField().sendKeys(userName);
+		//解决sendkey方法由于字符太长，只输入一部分就转到下一个选项，直接用js设置值属性
+		JavascriptExecutor js = (JavascriptExecutor) this.dr;
+		js.executeScript("document.getElementsByName('key')[0].setAttribute('value', '" + userName + "')", this.getUsernameTextField());
+//		this.getPasswordTextField().sendKeys(passWord);	
+		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
+		js2.executeScript("document.getElementsByName('password')[0].setAttribute('value', '" + passWord + "')", this.getUsernameTextField());
+//		this.getCaptchaTextField().sendKeys(CAPTCHA);
+		JavascriptExecutor js3 = (JavascriptExecutor) this.dr;
+		js3.executeScript("document.getElementsByName('captcha')[0].setAttribute('value', '666666')", this.getUsernameTextField());
 		this.getSubmitButton().click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return new HomePage(this.dr, redirectPageUrl);
 		
 	}

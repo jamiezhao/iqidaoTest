@@ -19,7 +19,6 @@ public class CreateActivityPage extends BasePage{
 		this.url = url;
 		this.goTo();
 	}
-
 	
 	By activityNameLocator = By.name("name");
 	By activityUserLimitLocator = By.id("userLimit");

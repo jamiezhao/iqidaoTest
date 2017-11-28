@@ -17,6 +17,12 @@ public class ActivitysPage extends BasePage{
 		this.goTo();
 	}
 	
+	By nextPageLocator = By.linkText("下一页");
+	
+	public WebElement getNextPageButton() {
+		return this.dr.findElement(nextPageLocator);
+	}
+	
 	public boolean gotoActivityDetailPageByName(String activityName) {
 		boolean flag = false;
 		WebElement ul = this.dr.findElement(By.className("item-list"));
@@ -33,6 +39,18 @@ public class ActivitysPage extends BasePage{
 		return flag;
 	}
 	
+	public String goNextPage() {
+		String className = this.getNextPageButton().getAttribute("class");
+		System.out.println("this is className " + className);
+		if("disabled".equals(className)) {
+			return "disabled";
+		}else {
+			this.getNextPageButton().click();
+			String currentUrl = this.dr.getCurrentUrl();
+			return currentUrl;
+		}
+		
+	}
 	
 	
 	
