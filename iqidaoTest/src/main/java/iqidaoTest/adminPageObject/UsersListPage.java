@@ -51,6 +51,11 @@ public class UsersListPage extends BasePage{
 		Select userGroupSelect = this.getUserGroupSelect();
 		userGroupSelect.selectByValue(userGroup);	//100为客服身份
 		this.getPasswordField().sendKeys(userPassword);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.getSubmitButton().click();
 	}
 

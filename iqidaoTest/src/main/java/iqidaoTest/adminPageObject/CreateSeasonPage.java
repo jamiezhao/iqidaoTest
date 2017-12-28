@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -14,8 +15,10 @@ public class CreateSeasonPage extends BasePage{
 		this.url = url;
 		this.goTo();
 	}
+	By activitySubmitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section[1]/form/footer/button");
+	By descriptionLocator = By.xpath("html/body/div[1]/div/section[2]/section[1]/form/div/div[5]/div/div/div[2]/div");
 	
-	By addSeasonButtonLocator = By.linkText("添加赛季");
+	By addSeasonButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section[2]/header/a");
 	By seasonNameLocator = By.xpath(".//*[@id='add-match']/div[2]/div[1]/input");
 	By seasonPriceLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[2]/input");
 	By seasonStartTimeLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[3]/input");
@@ -54,6 +57,8 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	public WebElement getAddItemButton() {
+		JavascriptExecutor js = (JavascriptExecutor) this.dr;
+	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(addItemButtonLocator));
 		return this.dr.findElement(addItemButtonLocator);
 	}
 	
@@ -94,12 +99,30 @@ public class CreateSeasonPage extends BasePage{
 		return flag; 
 	}
 	
+	public boolean getFirstItem(String itemName) {
+		boolean flag = false;
+		WebElement item = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section[3]/div/div[2]/table/tbody/tr/td[3]/a"));
+		if(item.getText().contains(itemName)) {
+			flag = true;
+		}
+		return flag;
+	}
 	
 	public void addActivitySeason(String seasonName, String seasonPrice, String seasonStartTime, String seasonEndTime) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		//页面滚动定位到添加赛季的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
-	    js.executeScript("arguments[0].scrollIntoView(true);", this.getAddSeasonButton());
-	    
+//	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(activitySubmitButtonLocator));
+	    js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 700");
+	    try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.getAddSeasonButton().click();
 		this.getSeasonNameTextField().sendKeys(seasonName);
 		this.getSeasonPriceTextField().sendKeys(seasonPrice);

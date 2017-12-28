@@ -3,6 +3,8 @@ package iqidaoTest.adminPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 //http://101.132.45.64/admin001/activities
@@ -46,9 +48,12 @@ public class ActivitysListPage extends BasePage{
 		boolean flag = false; 
 		for(int row = 1; row < activitiesTableRows + 1; row++) {
 			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
-			WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]"));
+//			WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]"));
 			if(actualActivityName.getText().contains(activityName)) {
 				flag = true;
+				this.dr.navigate().refresh();
+				new WebDriverWait(this.dr, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]")));
+				WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]/a"));
 				activityUsers.click();
 				break;
 			}

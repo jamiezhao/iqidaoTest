@@ -2,25 +2,24 @@ package iqidaoTest.testCase;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import iqidaoTest.Utils.CommonUtils;
-import iqidaoTest.Utils.SwitchToWindow;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
 import iqidaoTest.adminPageObject.CreateActivityPage;
-import iqidaoTest.adminPageObject.UsersListPage;
-import iqidaoTest.frontPageObject.ActivityDetailPage;
-import iqidaoTest.frontPageObject.ActivitysPage;
+import iqidaoTest.adminPageObject.CreateSeasonPage;
 import iqidaoTest.frontPageObject.HomePage;
 import iqidaoTest.frontPageObject.LoginPage;
 
@@ -62,7 +61,7 @@ public class TestLogin {
 	}
 	
 	//前台登录
-	@Test
+//	@Test
 	public void testLogin(){
 		String redirectPageUrl = "http://testing.iqidao.com/home";
 		String expectedResult = "学习中心";
@@ -70,6 +69,8 @@ public class TestLogin {
 		LoginPage login = new LoginPage(this.driver, url);
 		HomePage homePage = login.login(userName, passWord, redirectPageUrl);
 		
+		
+		/*
 		ActivitysPage activitysPage = new ActivitysPage(this.driver, traninsListUrl);
 		boolean result = activitysPage.gotoActivityDetailPageByName("分数检查");
 		if(result) {
@@ -87,6 +88,7 @@ public class TestLogin {
 			}
 			
 		}
+		*/
 //		new WebDriverWait(this.driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".btn.btn-lg.btn-danger.pay-btn")));
 			
 		
@@ -128,7 +130,7 @@ public class TestLogin {
 	
 	
 	//后台登录
-	@Ignore
+//	@Ignore
 	@Test
 	public void adminLogin() throws InterruptedException{
 		String userName = "186186";
@@ -162,8 +164,8 @@ public class TestLogin {
 //		UserCouponsPage userCouponsPage = new UserCouponsPage(this.driver, userCouponListUrl);
 //		userCouponsPage.addUserCoupon(couponUserName, couponPrice, couponStartTime, couponEndTime);
 		
-		UsersListPage usersListPage = new UsersListPage(this.driver, usersListUrl);
-		usersListPage.addUser(userRealName,mobilePhone,uesrGroup,userPassword);
+//		UsersListPage usersListPage = new UsersListPage(this.driver, usersListUrl);
+//		usersListPage.addUser(userRealName,mobilePhone,uesrGroup,userPassword);
 		
 		/*
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
@@ -180,9 +182,35 @@ public class TestLogin {
 		}
 		*/
 		
-//		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, activityUrl);
-//		createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
+		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
+		String activityUrl = activitysListPage.getActivityUrlByName("zlautoTest");
+		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, activityUrl);
+		createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
+		/*
+		try {
+			createSeasonPage.addActivitySeason("zlseason", "100", "2017-10-13 00:00", "2017-10-31 23:59");
+		}catch(NoSuchElementException e) {
+			String exceptionInfo = e.getAdditionalInformation();
+			String elementInfo = exceptionInfo.substring(exceptionInfo.indexOf("Using="), exceptionInfo.length()-1);
+			System.out.println(elementInfo);
+			String[] values = {"",""};
+			String[] strs = elementInfo.split(",");
+			for(int i = 0; i < strs.length; i++) {
+				String[] by = strs[i].split("=");
+				values[i] = by[1];
+			}
+			
+		}
+		*/
+		
 //		createSeasonPage.addCourceItem("zlcourse", "2017-10-13 00:00", "C:\\工作目录\\K级官子第1课时——研发完成.doc");
+		/*
+		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
+		String activityUsersUrl = activitysListPage.getActivityUsersUrlByName("zlautoTest");
+		ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, activityUsersUrl);
+		activityUsersPage.addActivityUser("zl棋手80");
+		*/
+		List a = new ArrayList();
 	}
 	
 

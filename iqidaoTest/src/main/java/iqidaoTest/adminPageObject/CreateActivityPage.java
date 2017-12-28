@@ -150,7 +150,11 @@ public class CreateActivityPage extends BasePage{
 		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
 	    js2.executeScript("arguments[0].scrollIntoView(true);", this.getSubmitButton());
 		this.getSubmitButton().click();
-		this.dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return new ActivitysListPage(this.dr, redirectPageUrl);
 	}
 	

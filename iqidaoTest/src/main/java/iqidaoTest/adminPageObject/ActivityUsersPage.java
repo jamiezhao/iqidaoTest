@@ -25,6 +25,11 @@ public class ActivityUsersPage extends BasePage{
 	public boolean findActivityUserName(String activityUserName) {
 		boolean flag = false;
 		for(int row = 1; row < activityUsersTableRows + 1; row++) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			WebElement actualUserName = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 			String actualUserNameStr = actualUserName.getText();
 			System.out.println(actualUserNameStr);
@@ -48,6 +53,7 @@ public class ActivityUsersPage extends BasePage{
 		//2.点击所属赛季，出现选项后点击，进行选择
 		this.dr.findElement(By.className("select2-search__field")).click();
 		WebElement ul = this.dr.findElement(By.className("select2-results__options"));
+		new WebDriverWait(this.dr,5).until(ExpectedConditions.presenceOfElementLocated(By.tagName("li")));
 		ul.findElement(By.tagName("li")).click();
 		//3.提交
 		this.dr.findElement(By.xpath(".//*[@id='add-student']/div[3]/button[2]")).click();
