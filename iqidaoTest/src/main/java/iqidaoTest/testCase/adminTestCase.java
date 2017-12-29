@@ -1,7 +1,7 @@
 package iqidaoTest.testCase;
 
-import org.junit.Ignore;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterTest;
@@ -13,10 +13,9 @@ import iqidaoTest.adminPageObject.ActivityUsersPage;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
+import iqidaoTest.adminPageObject.BasePage;
 import iqidaoTest.adminPageObject.CreateActivityPage;
 import iqidaoTest.adminPageObject.CreateSeasonPage;
-import iqidaoTest.adminPageObject.UserCouponsPage;
-import iqidaoTest.adminPageObject.UsersListPage;
 
 public class adminTestCase {
 	private WebDriver driver;
@@ -83,7 +82,7 @@ public class adminTestCase {
 	}
 	
 	//创建活动
-	@Test(dependsOnMethods = {"adminLogin"})
+//	@Test(dependsOnMethods = {"adminLogin"})
 	public void createActivity(){
 		String expectedResult = activityName;
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
@@ -93,33 +92,26 @@ public class adminTestCase {
 	}
 	
 	//创建赛季和课程
-	@Test(dependsOnMethods = {"createActivity"})
-	public void createSeasonAndCourse() {
+//	@Test(dependsOnMethods = {"createActivity"})
+	@Test(dependsOnMethods = {"adminLogin"})
+	public void createSeasonAndCourse() throws InterruptedException {
 		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
-		String editActivityUrl = activityListPage.getActivityUrlByName(activityName);
-		CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, editActivityUrl);
-		//等待页面加载完成
-		try {
+		WebElement activityDetail = activityListPage.getActivityByName(activityName);
+		if(activityDetail != null) {
+			activityDetail.click();
+			String currentUrl = this.driver.getCurrentUrl();
+			
+			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
+			System.out.println("before addseason" + this.driver);
+			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
 			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
-		//等待赛季创建成功后，页面加载完成
-		try {
+			System.out.println("after addseason" + this.driver);
+			createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
 			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		}else {
+			AssertJUnit.assertTrue(false);
 		}
-		createSeasonPage.addCourceItem(itemName, itemStartTime, courseSyllabus);
-		//等待条目创建成功后，页面加载完成
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		boolean flag = createSeasonPage.getFirstItem(itemName);
-		AssertJUnit.assertTrue(flag);
+		
 	}
 	
 	//手工添加活动用户
