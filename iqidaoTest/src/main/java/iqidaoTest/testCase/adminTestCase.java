@@ -100,7 +100,7 @@ public class adminTestCase {
 		if(activityDetail != null) {
 			activityDetail.click();
 			String currentUrl = this.driver.getCurrentUrl();
-			
+
 			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
 			System.out.println("before addseason" + this.driver);
 			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);

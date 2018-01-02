@@ -44,6 +44,17 @@ public class ActivitysListPage extends BasePage{
 		
 	}
 	
+	public WebElement getActivityByName(String activityName) {
+		WebElement actualActivityName = null; 
+		for(int row = 1; row < activitiesTableRows + 1; row++) {
+			actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
+			if(actualActivityName.getText().contains(activityName)) {
+				return actualActivityName;
+			}
+		}
+		return actualActivityName;
+	}
+	
 	public String getActivityUsersUrlByName(String activityName) {
 		boolean flag = false; 
 		for(int row = 1; row < activitiesTableRows + 1; row++) {

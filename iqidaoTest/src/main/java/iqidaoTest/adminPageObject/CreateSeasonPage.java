@@ -108,7 +108,7 @@ public class CreateSeasonPage extends BasePage{
 		return flag;
 	}
 	
-	public void addActivitySeason(String seasonName, String seasonPrice, String seasonStartTime, String seasonEndTime) {
+	public CreateSeasonPage addActivitySeason(String seasonName, String seasonPrice, String seasonStartTime, String seasonEndTime) {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -130,11 +130,22 @@ public class CreateSeasonPage extends BasePage{
 		this.getSeasonStartTimeTextField().sendKeys(seasonStartTime);
 		this.getSeasonEndTimeTextField().clear();
 		this.getSeasonEndTimeTextField().sendKeys(seasonEndTime);
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.getSeasonSubmitButton().click();
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new CreateSeasonPage(this.dr, this.url);
 	}
 	
 	
-	public void addCourceItem(String itemName, String itemStartTime, String courseSyllabus) {
+	public CreateSeasonPage addCourseItem(String itemName, String itemStartTime, String courseSyllabus) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
@@ -145,10 +156,21 @@ public class CreateSeasonPage extends BasePage{
 	    Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("0");
 	    this.getcourseSyllabusTextField().sendKeys(courseSyllabus);
+	    try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	    this.getItemSubmitButton().click();
+	    try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    return new CreateSeasonPage(this.dr, this.url);
 	}
 	
-	public void addExamItem(String itemName, String itemStartTime) {
+	public CreateSeasonPage addExamItem(String itemName, String itemStartTime) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
@@ -157,7 +179,18 @@ public class CreateSeasonPage extends BasePage{
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 		Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("1");
+	    try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	    this.getItemSubmitButton().click();
+	    try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    return new CreateSeasonPage(this.dr, this.url);
 	}
 	
 	
