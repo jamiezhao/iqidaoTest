@@ -57,8 +57,6 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	public WebElement getAddItemButton() {
-		JavascriptExecutor js = (JavascriptExecutor) this.dr;
-	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(addItemButtonLocator));
 		return this.dr.findElement(addItemButtonLocator);
 	}
 	
@@ -109,11 +107,6 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	public CreateSeasonPage addActivitySeason(String seasonName, String seasonPrice, String seasonStartTime, String seasonEndTime) {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		//页面滚动定位到添加赛季的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(activitySubmitButtonLocator));
@@ -148,7 +141,8 @@ public class CreateSeasonPage extends BasePage{
 	public CreateSeasonPage addCourseItem(String itemName, String itemStartTime, String courseSyllabus) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
-	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+//	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
 	    this.getAddItemButton().click();
 	    this.getItemNameTextField().sendKeys(itemName);
 	    this.getItemStartTimeTextField().clear();
@@ -173,7 +167,8 @@ public class CreateSeasonPage extends BasePage{
 	public CreateSeasonPage addExamItem(String itemName, String itemStartTime) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
-	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+//	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
 	    this.getItemNameTextField().sendKeys(itemName);
 	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);

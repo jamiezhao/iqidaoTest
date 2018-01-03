@@ -13,11 +13,12 @@ import iqidaoTest.adminPageObject.ActivityUsersPage;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
-import iqidaoTest.adminPageObject.BasePage;
 import iqidaoTest.adminPageObject.CreateActivityPage;
 import iqidaoTest.adminPageObject.CreateSeasonPage;
+import iqidaoTest.adminPageObject.UserCouponsPage;
+import iqidaoTest.adminPageObject.UsersListPage;
 
-public class adminTestCase {
+public class UserTC {
 	private WebDriver driver;
 	//页面URL
 	String adminLoginUrl = "http://testing.iqidao.com/admin001";
@@ -81,68 +82,7 @@ public class adminTestCase {
 		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
 	
-	//创建活动
-//	@Test(dependsOnMethods = {"adminLogin"})
-	public void createActivity(){
-		String expectedResult = activityName;
-		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
-		String actualResult = activitysListPage.getFirstActivityName().getText();
-		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
-	}
 	
-	//创建赛季和课程
-//	@Test(dependsOnMethods = {"createActivity"})
-	@Test(dependsOnMethods = {"adminLogin"})
-	public void createSeasonAndCourse() throws InterruptedException {
-		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
-		WebElement activityDetail = activityListPage.getActivityByName(activityName);
-		if(activityDetail != null) {
-			activityDetail.click();
-			String currentUrl = this.driver.getCurrentUrl();
-
-			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
-			System.out.println("before addseason" + this.driver);
-			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
-			Thread.sleep(10000);
-			System.out.println("after addseason" + this.driver);
-			createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
-			Thread.sleep(10000);
-		}else {
-			AssertJUnit.assertTrue(false);
-		}
-		
-	}
-	
-	//手工添加活动用户
-	@Test(dependsOnMethods = {"createSeasonAndCourse"})
-//	@Test(dependsOnMethods = {"adminLogin"})
-	public void addActivityUser() {
-		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
-		String activityUsersUrl = activitysListPage.getActivityUsersUrlByName(activityName);
-		ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, activityUsersUrl);
-		activityUsersPage.addActivityUser(activityUserName);
-		boolean result = activityUsersPage.findActivityUserName(activityUserName);
-		AssertJUnit.assertTrue(result);
-		
-	}
-	
-	//手动删除活动用户
-	@Test(dependsOnMethods = {"addActivityUser"})
-	public void deleteActivityUser() {
-		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
-		String activityUsersUrl = activityListPage.getActivityUsersUrlByName(activityName);
-		System.out.println(activityUsersUrl);
-		ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, activityUsersUrl);
-		boolean flag = activityUsersPage.findActivityUserName(activityUserName);
-		if(flag) {
-			boolean result = activityUsersPage.deleteActivityUser(activityUserName);
-			AssertJUnit.assertTrue(result);
-		}
-		AssertJUnit.assertTrue(flag);
-	}
-	
-	/*
 	//发放用户优惠券
 	@Test(dependsOnMethods = {"createSeasonAndCourse"})
 	public void sendUserCoupon() {
@@ -160,7 +100,6 @@ public class adminTestCase {
 		usersListPage.addUser(userRealName, mobilePhone, userGroup, userPassword);
 		
 	}
-	*/
 	
 	@AfterTest
 	public void afterTest() {

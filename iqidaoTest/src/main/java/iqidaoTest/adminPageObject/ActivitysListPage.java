@@ -49,32 +49,23 @@ public class ActivitysListPage extends BasePage{
 		for(int row = 1; row < activitiesTableRows + 1; row++) {
 			actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
 			if(actualActivityName.getText().contains(activityName)) {
+				System.out.println(actualActivityName.getText());
 				return actualActivityName;
 			}
 		}
 		return actualActivityName;
 	}
 	
-	public String getActivityUsersUrlByName(String activityName) {
-		boolean flag = false; 
+	public WebElement getActivityUsersByName(String activityName) {
+		WebElement activityUsers = null; 
 		for(int row = 1; row < activitiesTableRows + 1; row++) {
 			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
-//			WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]"));
 			if(actualActivityName.getText().contains(activityName)) {
-				flag = true;
-				this.dr.navigate().refresh();
-				new WebDriverWait(this.dr, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]")));
-				WebElement activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]/a"));
-				activityUsers.click();
-				break;
+				activityUsers = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[5]"));
+				return activityUsers;
 			}
 		}
-		if(flag) {
-			String currentUrl = this.dr.getCurrentUrl();
-			return currentUrl;
-		}else {
-			return "can not find the activity";
-		}
+		return activityUsers;
 	}
 	
 

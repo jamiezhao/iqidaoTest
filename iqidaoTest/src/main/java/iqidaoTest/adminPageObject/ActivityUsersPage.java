@@ -1,5 +1,7 @@
 package iqidaoTest.adminPageObject;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +45,11 @@ public class ActivityUsersPage extends BasePage{
 	}
 	
 	public void addActivityUser(String activityUserName) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.getAddUserButton().click();
 		//1.点击用户名输入框，待出现输入框后输入搜索值，待出现搜索结果后进行点击选择
 		new WebDriverWait(this.dr,5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='add-student']/div[2]/div[1]/div/span[1]")));
@@ -52,9 +59,14 @@ public class ActivityUsersPage extends BasePage{
 		this.dr.findElement(By.cssSelector(".clearfix.text-center.ajaxSelect")).click();
 		//2.点击所属赛季，出现选项后点击，进行选择
 		this.dr.findElement(By.className("select2-search__field")).click();
-		WebElement ul = this.dr.findElement(By.className("select2-results__options"));
-		new WebDriverWait(this.dr,5).until(ExpectedConditions.presenceOfElementLocated(By.tagName("li")));
-		ul.findElement(By.tagName("li")).click();
+//		WebElement ul = this.dr.findElement(By.className("select2-results__options"));
+//		new WebDriverWait(this.dr,5).until(ExpectedConditions.presenceOfElementLocated(By.tagName("li")));
+		this.dr.findElement(By.xpath("html/body/span/span/span/ul/li[2]")).click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		//3.提交
 		this.dr.findElement(By.xpath(".//*[@id='add-student']/div[3]/button[2]")).click();
 	}
