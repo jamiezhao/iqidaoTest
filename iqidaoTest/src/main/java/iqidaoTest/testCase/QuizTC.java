@@ -48,7 +48,7 @@ public class QuizTC {
 		this.driver.manage().window().maximize();
 	}
 
-	@Test
+	@Test(groups = {"classadd"}) 
 	public void QuizClassadd() {
 		// 登录
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
@@ -68,7 +68,8 @@ public class QuizTC {
 		}
 	}
 
-	@Test(dependsOnMethods = { "QuizClassadd" })
+	@Test(groups = {"quizadd"})
+	//(dependsOnMethods = { "QuizClassadd" })
 	// 前提分类添加成功，执行试题添加
 	public void Quizadd() {
 		// 登录
@@ -82,7 +83,8 @@ public class QuizTC {
 		search.Exist(quizname, fenlei);
 	}
 
-	@Test(dependsOnMethods = { "Quizadd" })
+	@Test(groups = {"quizmod"})
+	//(dependsOnMethods = { "Quizadd" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizmod() {
 		// 登录
@@ -95,7 +97,8 @@ public class QuizTC {
 		// 修改完成检查是否修改
 		mod.Exist(newname, fenlei);
 	}
-	@Test(dependsOnMethods = { "Quizmod" })
+	@Test(groups = {"quizdel"})
+	//(dependsOnMethods = { "Quizmod" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizdel() {
 		// 登录
