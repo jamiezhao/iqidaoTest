@@ -1,8 +1,7 @@
 package iqidaoTest.adminPageObject;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,23 +24,28 @@ public class ActivityUsersPage extends BasePage{
 	}
 	
 	public boolean findActivityUserName(String activityUserName) {
-		boolean flag = false;
-		for(int row = 1; row < activityUsersTableRows + 1; row++) {
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		try {
+			boolean flag = false;
+			for(int row = 1; row < activityUsersTableRows + 1; row++) {
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				WebElement actualUserName = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
+				String actualUserNameStr = actualUserName.getText();
+				System.out.println(actualUserNameStr);
+				System.out.println(activityUserName);
+				if(actualUserNameStr.equals(activityUserName)) {
+					flag = true;
+					break;
+				}
 			}
-			WebElement actualUserName = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
-			String actualUserNameStr = actualUserName.getText();
-			System.out.println(actualUserNameStr);
-			if(actualUserNameStr.equals(activityUserName)) {
-				flag = true;
-				return flag;
-			}
+			return flag;
+		}catch(NoSuchElementException e) {
+			return false;
 		}
 		
-		return flag;
 	}
 	
 	public void addActivityUser(String activityUserName) {
@@ -51,6 +55,11 @@ public class ActivityUsersPage extends BasePage{
 			e.printStackTrace();
 		}
 		this.getAddUserButton().click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		//1.点击用户名输入框，待出现输入框后输入搜索值，待出现搜索结果后进行点击选择
 		new WebDriverWait(this.dr,5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='add-student']/div[2]/div[1]/div/span[1]")));
 		this.dr.findElement(By.xpath(".//*[@id='add-student']/div[2]/div[1]/div/span[1]")).click();
@@ -76,11 +85,15 @@ public class ActivityUsersPage extends BasePage{
 		for(int row = 1; row < activityUsersTableRows + 1; row++) {
 			WebElement actualUserName = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 			String actualUserNameStr = actualUserName.getText();
-			System.out.println(actualUserNameStr);
 			if(actualUserNameStr.equals(activityUserName)) {
 				flag = true;
 				WebElement deleteButton = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[10]"));
 				deleteButton.click();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				WebElement deleteConfirmButton = this.dr.findElement(By.xpath(".//*[@id='delete-confirm']"));
 				deleteConfirmButton.click();
 				return flag;

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testcases>
+<urls>
+
+	<adminLoginUrl>http://testing.iqidao.com/admin001</adminLoginUrl>
+	<adminHomeUrl>http://testing.iqidao.com/admin001/home</adminHomeUrl>
+	<createActivityUrl>http://testing.iqidao.com/admin001/activity/post</createActivityUrl>
+	<activitysListUrl>http://testing.iqidao.com/admin001/activities</activitysListUrl>
+	<userCouponListUrl>http://testing.iqidao.com/admin001/coupon/user</userCouponListUrl>
+	<usersListUrl>http://testing.iqidao.com/admin001/users</usersListUrl>
+	<publicurl>http://testing.iqidao.com/admin001/resource/public/article</publicurl>
+
+</urls>
+<params>
+	<login> 
+		<userName name="用户名">186186</userName>
+		<passWord name="密码">111111</passWord>
+	</login>
+	<activity>
+		<activityName name="活动名称">zlautoTest</activityName>
+		<teacherName name="主讲老师姓名">zl老师00</teacherName>
+		<signupCount name="用户报名人数">0</signupCount>
+		<lowduan name="最低段位">-4</lowduan>
+		<price name="活动价格">1</price>
+		<signupStartTime name="报名开始时间">2018-01-01 00:00</signupStartTime>
+		<signupEndTime name="报名结束时间">2018-01-15 00:00</signupEndTime>
+		<activityStartTime name="活动开始时间">2018-01-16 00:00</activityStartTime>
+		<activityEndTime name="活动结束时间">2018-01-31 00:00</activityEndTime>
+		<seasonName name="赛季名称">第一季</seasonName>
+		<seasonPrice name="赛季价格">1</seasonPrice>
+		<itemName name="课程名称">第一课</itemName>
+		<itemStartTime name="课程开始时间">2018-01-16 19:30</itemStartTime>
+		<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>
+		<activityUserName name="活动用户">zl棋手80</activityUserName>
+	</activity>
+	<coupon>
+		<couponUserName name="优惠券用户">zl棋手80</couponUserName>
+		<couponPrice name="优惠券价格">1</couponPrice>
+		<couponStartTime name="优惠券开始时间">2018-01-16 00:00</couponStartTime>
+		<couponEndTime name="优惠券结束时间">2018-01-31 00:00</couponEndTime>
+	</coupon>
+	<user>
+		<userRealName name="真实姓名">zltest</userRealName>
+		<mobilePhone name="手机号">11111111111</mobilePhone>
+		<userGroup name="身份">100</userGroup>
+		<userPassword name="密码">111111</userPassword>
+	</user>
+	
+</params>
+</testcases>
