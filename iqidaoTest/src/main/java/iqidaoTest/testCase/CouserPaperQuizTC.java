@@ -87,7 +87,7 @@ public class CouserPaperQuizTC {
 		del.delquiz();
 	}
 
-	@Test(dependsOnMethods = { "adminLogin" })
+	@Test
 	public void addcoursequiz1() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -121,7 +121,7 @@ public class CouserPaperQuizTC {
 		paperserach.ElementExist();
 	}
 
-	@Test(dependsOnMethods = { "adminLogin" })
+	@Test
 	public void addcoursequiz2() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
