@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import iqidaoTest.adminPageObject.BasePage;
 
-public class CourseQuizAddPage extends BasePage {
+public class CourseQuizAdd extends BasePage {
 
-	public CourseQuizAddPage(WebDriver driver) {
+	public CourseQuizAdd(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}

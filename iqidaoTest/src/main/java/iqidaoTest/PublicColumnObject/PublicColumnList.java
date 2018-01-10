@@ -10,10 +10,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import iqidaoTest.adminPageObject.BasePage;
 
-public class PublicColumnListPage extends BasePage {
+public class PublicColumnList extends BasePage {
 	private int TableRows = 20;
 
-	public PublicColumnListPage(WebDriver driver, String url) {
+	public PublicColumnList(WebDriver driver, String url) {
 		super(driver);
 		this.url = url;
 		this.goTo();
@@ -111,7 +111,7 @@ public class PublicColumnListPage extends BasePage {
 			return "can not find the activity";
 		}
 	}
-	public boolean Judgeif(String name){
+	public boolean judgeif(String name){
 		boolean flag = false; 
 		Search(name);
 		try{

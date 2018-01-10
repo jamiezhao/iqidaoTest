@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.Select;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.BasePage;
 
-public class QuizClassListPage extends BasePage {
+public class QuizClassList extends BasePage {
 	private int TableRows = 20;
 
-	public QuizClassListPage(WebDriver driver, String url) {
+	public QuizClassList(WebDriver driver, String url) {
 		super(driver);
 		this.url = url;
 		this.goTo();

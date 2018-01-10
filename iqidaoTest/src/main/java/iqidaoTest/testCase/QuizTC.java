@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import iqidaoTest.QuizObject.QuizClassListPage;
+import iqidaoTest.QuizObject.QuizClassList;
 import iqidaoTest.QuizObject.QuizClassficationPage;
 import iqidaoTest.QuizObject.QuizListPage;
 import iqidaoTest.Utils.xmlData;
@@ -19,10 +19,9 @@ public class QuizTC {
 	// 定义页面url
 	String adminLoginUrl = xmlData.getParamFromXml("adminLoginUrl");
 	String adminHomeUrl = xmlData.getParamFromXml("adminHomeUrl");
-	String QuizClassUrl = xmlData.getParamFromXml("QuizClassUrl");
+	String QUIZCLASSurl = xmlData.getParamFromXml("QUIZCLASSurl");
 	String QuizListUrl = xmlData.getParamFromXml("QuizListUrl");
 	// 登录参数
-	String ChormeURL=xmlData.getParamFromXml("ChormeURL");
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	// 试题分类添加参数值
@@ -45,41 +44,41 @@ public class QuizTC {
 
 	@BeforeTest
 	public void BeforeSuite() {
-		System.setProperty("webdriver.chrome.driver", ChormeURL);
+		System.setProperty("webdriver.chrome.driver", "C:\\231\\chromedriver.exe");
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 	}
 	@Test
-	public void QuizClassAdd() {
+	public void QuizClassadd() {
 		// 新增分类,首先判断同code是否存在
-		QuizClassListPage list = new QuizClassListPage(this.driver, QuizClassUrl);
+		QuizClassList list = new QuizClassList(this.driver, QUIZCLASSurl);
 		if (list.getPaperSearchList1(code)) {
 			// 存在则不添加
 			System.out.println("已存在不需要添加分类");
 		} else {
 			System.out.println("不存在，需要手动添加分类");
 			// 定义获取到的名称
-			QuizClassficationPage add = new QuizClassficationPage(this.driver, QuizClassUrl);
-			add.AddQuizClass(code, newclassname, QuizClassUrl);
+			QuizClassficationPage add = new QuizClassficationPage(this.driver, QUIZCLASSurl);
+			add.AddQuizClass(code, newclassname, QUIZCLASSurl);
 			// 检查分类是否添加成功
 			list.WeblementExist(newclassname);
 		}
 	}
-	@Test//(dependsOnMethods = { "QuizClassAdd" })
+	@Test(dependsOnMethods = { "QuizClassadd" })
 	// 前提分类添加成功，执行试题添加
-	public void QuizAdd() {
+	public void Quizadd() {
 		// 新增试题
-		QuizClassListPage add = new QuizClassListPage(this.driver, QuizClassUrl);
+		QuizClassList add = new QuizClassList(this.driver, QUIZCLASSurl);
 		add.QuizAdd(code, duanwei, fenlei, goal, tixing, first1, filename, result, QuizListUrl);
 		// 新增试题完毕，点击查询，检查是否添加成功
 		QuizListPage search = new QuizListPage(driver, QuizListUrl);
 		search.Exist(quizname, fenlei);
 	}
-	@Test(dependsOnMethods = { "QuizAdd" })
+	@Test(dependsOnMethods = { "Quizadd" })
 	// 前提试题添加成功，执行试题修改
-	public void QuizMod() {
+	public void Quizmod() {
 		// 修改试题
 		QuizListPage mod = new QuizListPage(driver, QuizListUrl);
 		mod.ModifyQuiz(quizname, fenlei, newfile, newnamequiz, QuizListUrl);
@@ -87,9 +86,9 @@ public class QuizTC {
 		// 修改完成检查是否修改
 		mod.Exist(newnamequiz, fenlei);
 	}
-	@Test(dependsOnMethods = { "QuizMod" })
+	@Test(dependsOnMethods = { "Quizmod" })
 	// 前提试题添加成功，执行试题修改
-	public void QuizDel() {
+	public void Quizdel() {
 		// 查询试题
 		QuizListPage del = new QuizListPage(driver, QuizListUrl);
 		del.SearchQuiz(newnamequiz, fenlei);

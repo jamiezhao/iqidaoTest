@@ -38,7 +38,7 @@ public class QuizClassficationPage extends BasePage {
 		return this.dr.findElement(SaveButtonLoactor);
 	}
 
-	public QuizClassListPage AddQuizClass(String code, String quizclassname, String PageUrl) {
+	public QuizClassList AddQuizClass(String code, String quizclassname, String PageUrl) {
 		// 添加试题分类
 		this.getAddButtonLoactor().click();
 		this.getClassficationNameLoactor().sendKeys(quizclassname);
@@ -50,6 +50,6 @@ public class QuizClassficationPage extends BasePage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new QuizClassListPage(this.dr, PageUrl);
+		return new QuizClassList(this.dr, PageUrl);
 	}
 }

@@ -10,7 +10,7 @@
 	<usersListUrl>http://testing.iqidao.com/admin001/users</usersListUrl>
 	<publicurl>http://testing.iqidao.com/admin001/resource/public/article</publicurl>
 	<paperSearchUrl>http://testing.iqidao.com/admin001/papers</paperSearchUrl>
-	<QuizClassUrl>http://testing.iqidao.com/admin001/quiz/classes</QuizClassUrl>
+	<QUIZCLASSurl>http://testing.iqidao.com/admin001/quiz/classes</QUIZCLASSurl>
 	<QuizListUrl>http://testing.iqidao.com/admin001/quizzes</QuizListUrl>
 
 </urls>
@@ -18,7 +18,6 @@
 	<login> 
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
-		<ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL>
 	</login>
 	<activity>
 		<activityName name="活动名称">zlautoTest</activityName>
@@ -61,23 +60,24 @@
 		<filename name="文件路径">C:\\官子sgf\\1K黑先自动应答题-如何破入白空.sgf</filename>
 		<result name="试题结果类型">1</result>
 		<quizname name="试题名称">如何破入白空</quizname>
-                <newfile name="修改试题名称">C:\\官子sgf\\6D黑先自动应答，如何全部收取四个一路扳？（思考对手反击）.sgf</newfile>
-                <newnamequiz name="修改试题名称">试题名称修改</newnamequiz>
+		<newfile name="新试题文件路径">如何破入白空</newfile>	
+		<newnamequiz name="修改试题名称">试题名称修改</newnamequiz>
 	</quiz>
 	<public>
 		<newname name="新闻名称">zjy_news</newname>
 		<modnewname name="修改新闻名称">zjy_mod</modnewname>
 		<newsclass name="类型">1</newsclass>
-		<fileurl name="封面路径">C:\\Users\\zhangjy\\Desktop\\教师登录.png</fileurl>
 	</public>
 <paper>
-		<exameName name="课程-考试">考试</exameName>
+		<CourseName name="课程名称">第一课</CourseName>
+		<exameName name="课程-考试">第一课练习题</exameName>
+		<papername name="试卷名称">第一课</papername>
 		<orginselect name="orginselect">3</orginselect>
+		<papername1 name="papername1">第一课预习题</papername1>
+		<papername2 name="papername2">分支9考试</papername2>
 		<orginselect1 name="orginselect1">2</orginselect1>
 		<orginselect2 name="orginselect2">1</orginselect2>
-</paper>
+		</paper>
 
 </params>
 </testcases>
-
-
