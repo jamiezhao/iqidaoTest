@@ -169,6 +169,7 @@ public class CreateSeasonPage extends BasePage{
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
+		this.getAddItemButton().click();
 	    this.getItemNameTextField().sendKeys(examItemName);
 	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
