@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import iqidaoTest.adminPageObject.BasePage;
 
-public class PublicColumn extends BasePage {
-	public PublicColumn(WebDriver driver, String url) {
+public class PublicColumnAddPage extends BasePage {
+	public PublicColumnAddPage(WebDriver driver, String url) {
 		super(driver);
 		this.url = url;
 		this.goTo();
@@ -82,7 +82,7 @@ public class PublicColumn extends BasePage {
 	}
 
 	// 添加专栏信息
-	public void addColoumn(String newname, String newsclass) {
+	public void AddColoumn(String newname, String newsclass,String fileurl) {
 		// 点击添加
 		this.getpublicaAddLoactor().click();
 		// 保存按钮首次点击异常，暂时解决方法点击两次
@@ -98,7 +98,7 @@ public class PublicColumn extends BasePage {
 		this.getNewtimeLoactor().click();
 		this.getNeworderLoactor().sendKeys("1");
 		this.getNewviewedLoactor().sendKeys("2");
-		this.getNewImageLoactor().sendKeys("C:\\Users\\zhangjy\\Desktop\\教师登录.png");
+		this.getNewImageLoactor().sendKeys(fileurl);
 		this.getNewtroduLoactor().sendKeys("3");
 		// 滚动条下拉
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
