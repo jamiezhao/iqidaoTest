@@ -138,13 +138,13 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	
-	public CreateSeasonPage addCourseItem(String itemName, String itemStartTime, String courseSyllabus) {
+	public CreateSeasonPage addCourseItem(String courseItemName, String itemStartTime, String courseSyllabus) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
 	    this.getAddItemButton().click();
-	    this.getItemNameTextField().sendKeys(itemName);
+	    this.getItemNameTextField().sendKeys(courseItemName);
 	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 	    Select select = new Select(this.getItemTypeSelect());
@@ -164,12 +164,12 @@ public class CreateSeasonPage extends BasePage{
 	    return new CreateSeasonPage(this.dr, this.url);
 	}
 	
-	public CreateSeasonPage addExamItem(String itemName, String itemStartTime) {
+	public CreateSeasonPage addExamItem(String examItemName, String itemStartTime) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
-	    this.getItemNameTextField().sendKeys(itemName);
+	    this.getItemNameTextField().sendKeys(examItemName);
 	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 		Select select = new Select(this.getItemTypeSelect());

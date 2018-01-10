@@ -43,7 +43,8 @@ public class ActivityTC {
 	String seasonStartTime = activityStartTime;
 	String seasonEndTime = activityEndTime;
 	//创建课程
-	String itemName = xmlData.getParamFromXml("itemName");
+	String courseItemName = xmlData.getParamFromXml("courseItemName");
+	String examItemName = xmlData.getParamFromXml("examItemName");
 	String itemStartTime = xmlData.getParamFromXml("itemStartTime");
 	String courseSyllabus = xmlData.getParamFromXml("courseSyllabus");
 
@@ -88,8 +89,9 @@ public class ActivityTC {
 			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
 			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
 			Thread.sleep(10000);
-			createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
+			createSeasonPage = createSeasonPage.addCourseItem(courseItemName, itemStartTime, courseSyllabus);
 			Thread.sleep(10000);
+			createSeasonPage = createSeasonPage.addExamItem(examItemName, itemStartTime);
 		}else {
 			AssertJUnit.assertTrue(false);
 		}

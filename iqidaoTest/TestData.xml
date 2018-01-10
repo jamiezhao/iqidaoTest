@@ -31,7 +31,8 @@
 		<activityEndTime name="活动结束时间">2018-01-31 00:00</activityEndTime>
 		<seasonName name="赛季名称">第一季</seasonName>
 		<seasonPrice name="赛季价格">1</seasonPrice>
-		<itemName name="课程名称">第一课</itemName>
+		<courseItemName name="课程名称">第一课</courseItemName>
+		<examItemName name="考试名称">期末考试</examItemName>
 		<itemStartTime name="课程开始时间">2018-01-16 19:30</itemStartTime>
 		<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>
 		<activityUserName name="活动用户">zl棋手80</activityUserName>
