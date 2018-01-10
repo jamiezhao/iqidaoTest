@@ -76,7 +76,7 @@ public class PaperListPage extends BasePage {
 		}	
 	}
 	//删除功能检查
-	public String delquiz() {
+	public String Delquiz() {
 		this.getQuizDelLoactor().click();
 		try {
 			Thread.sleep(2000);
