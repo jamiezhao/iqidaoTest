@@ -11,11 +11,11 @@
       <class name="iqidaoTest.testCase.QuizTC" />
     </classes>
   </test> <!-- Test -->
-     <test verbose="2" preserve-order="true" name="activity test">
+     <test verbose="2" preserve-order="true" name="Default test">
     <classes>
 	   <class name="iqidaoTest.testCase.ActivityTC"/>
 	   <class name="iqidaoTest.testCase.ActivityUserTC"/>
 	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>
     </classes>
-  </test> <!-- activity test -->
+  </test> <!-- Default test -->
 </suite> <!-- Default suite -->
