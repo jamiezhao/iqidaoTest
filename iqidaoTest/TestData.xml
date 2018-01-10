@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <testcases>
 <urls>
 
@@ -77,7 +77,9 @@
 		<papername2 name="papername2">分支9考试</papername2>
 		<orginselect1 name="orginselect1">2</orginselect1>
 		<orginselect2 name="orginselect2">1</orginselect2>
-		</paper>
+</paper>
 
 </params>
 </testcases>
+
+
