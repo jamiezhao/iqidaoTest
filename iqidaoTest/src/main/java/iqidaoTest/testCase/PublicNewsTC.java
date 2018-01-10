@@ -22,7 +22,7 @@ public class PublicNewsTC {
 	String adminLoginUrl = xmlData.getParamFromXml("adminLoginUrl");
 	String adminHomeUrl = xmlData.getParamFromXml("adminHomeUrl");
 	String publicurl = xmlData.getParamFromXml("publicurl");
-	// 登录参数值
+	// 登录参数
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	// 专栏信息添加参数值
@@ -38,8 +38,8 @@ public class PublicNewsTC {
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 	}
-
 	@Test
+	//添加新信息
 	public void publicclumnadd() {
 		PublicColumn add = new PublicColumn(this.driver, publicurl);
 		add.addColoumn(newname, newsclass);
@@ -72,7 +72,6 @@ public class PublicNewsTC {
 	// 删除案例
 	@Test(dependsOnMethods = { "publicclumnmod" })
 	public void publicclumndel() throws InterruptedException {
-		// 登录
 		PublicColumnList list = new PublicColumnList(this.driver, publicurl);
 		list.DEL(modnewname);
 		// 判断是否删除

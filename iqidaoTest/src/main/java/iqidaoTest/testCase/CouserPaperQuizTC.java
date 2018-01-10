@@ -22,7 +22,7 @@ public class CouserPaperQuizTC {
 	String adminLoginUrl = xmlData.getParamFromXml("adminLoginUrl");
 	String adminHomeUrl = xmlData.getParamFromXml("adminHomeUrl");
 	String paperSearchUrl = xmlData.getParamFromXml("paperSearchUrl");
-	// 登录参数值
+	// 登录
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	// 查询试卷
@@ -38,7 +38,6 @@ public class CouserPaperQuizTC {
 	// 0-系统试卷；1专项考试；2-专项预习；3-专项课后；4-错题本；5推荐试卷
 	String orginselect2 = xmlData.getParamFromXml("orginselect2");
 	String newnamequiz = xmlData.getParamFromXml("newnamequiz");
-
 	@BeforeTest
 	public void BeforeSuite() {
 		System.setProperty("webdriver.chrome.driver", "C:\\231\\chromedriver.exe");
@@ -87,7 +86,7 @@ public class CouserPaperQuizTC {
 		del.delquiz();
 	}
 
-	@Test(dependsOnMethods = { "adminLogin" })
+	@Test
 	public void addcoursequiz1() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -121,7 +120,7 @@ public class CouserPaperQuizTC {
 		paperserach.ElementExist();
 	}
 
-	@Test(dependsOnMethods = { "adminLogin" })
+	@Test
 	public void addcoursequiz2() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);

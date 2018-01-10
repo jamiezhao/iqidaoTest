@@ -21,7 +21,7 @@ public class QuizTC {
 	String adminHomeUrl = xmlData.getParamFromXml("adminHomeUrl");
 	String QUIZCLASSurl = xmlData.getParamFromXml("QUIZCLASSurl");
 	String QuizListUrl = xmlData.getParamFromXml("QuizListUrl");
-	// 登录参数值
+	// 登录参数
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	// 试题分类添加参数值
@@ -50,8 +50,7 @@ public class QuizTC {
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 	}
-
-	@Test // (dependsOnMethods = {"adminLogin"})
+	@Test
 	public void QuizClassadd() {
 		// 新增分类,首先判断同code是否存在
 		QuizClassList list = new QuizClassList(this.driver, QUIZCLASSurl);
@@ -67,21 +66,16 @@ public class QuizTC {
 			list.WeblementExist(newclassname);
 		}
 	}
-
 	@Test(dependsOnMethods = { "QuizClassadd" })
 	// 前提分类添加成功，执行试题添加
 	public void Quizadd() {
 		// 新增试题
-		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
-		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
-
 		QuizClassList add = new QuizClassList(this.driver, QUIZCLASSurl);
 		add.QuizAdd(code, duanwei, fenlei, goal, tixing, first1, filename, result, QuizListUrl);
 		// 新增试题完毕，点击查询，检查是否添加成功
 		QuizListPage search = new QuizListPage(driver, QuizListUrl);
 		search.Exist(quizname, fenlei);
 	}
-
 	@Test(dependsOnMethods = { "Quizadd" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizmod() {
@@ -92,8 +86,7 @@ public class QuizTC {
 		// 修改完成检查是否修改
 		mod.Exist(newnamequiz, fenlei);
 	}
-
-	// @Test(dependsOnMethods = {"Quizmod"})
+	@Test(dependsOnMethods = { "Quizmod" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizdel() {
 		// 查询试题
