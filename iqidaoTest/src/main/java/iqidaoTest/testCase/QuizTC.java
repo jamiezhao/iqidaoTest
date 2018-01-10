@@ -3,56 +3,55 @@ package iqidaoTest.testCase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import iqidaoTest.QuizObject.QuizClassList;
 import iqidaoTest.QuizObject.QuizClassficationPage;
 import iqidaoTest.QuizObject.QuizListPage;
+import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
 
 public class QuizTC {
 	private WebDriver driver;
 	// 定义页面url
-	String adminLoginUrl = "http://testing.iqidao.com/admin001";
-	String adminHomeUrl = "http://testing.iqidao.com/admin001/home";
-	String QUIZCLASSurl = "http://testing.iqidao.com/admin001/quiz/classes";
-	String QuizListUrl = "http://testing.iqidao.com/admin001/quizzes";
-	// 登录参数值
-	String userName = "186186";
-	String passWord = "111111";
+	String adminLoginUrl = xmlData.getParamFromXml("adminLoginUrl");
+	String adminHomeUrl = xmlData.getParamFromXml("adminHomeUrl");
+	String QUIZCLASSurl = xmlData.getParamFromXml("QUIZCLASSurl");
+	String QuizListUrl = xmlData.getParamFromXml("QuizListUrl");
+	// 登录参数
+	String userName = xmlData.getParamFromXml("userName");
+	String passWord = xmlData.getParamFromXml("passWord");
 	// 试题分类添加参数值
-	String quizclassname = "分班测评";// 分类名称
-	String code = "13";
-	String newclassname = "试题分类新增";
+	String quizclassname = xmlData.getParamFromXml("quizclassname");// 分类名称
+	String code = xmlData.getParamFromXml("code");
+	String newclassname = xmlData.getParamFromXml("newclassname");
 	// 试题添加参数值
-	String duanwei = "1";// 段位
-	String fenlei = "1";// 试题分类1-死活2-布局3-定式4-中盘5-管子
-	String goal = "1";// 计算目标1-计算2-判断3-攻防4-定式5-棋型6-价值7-大局
-	String tixing = "4";// 试题类型1-摆图2-选择4-自动应答
-	String first1 = "1";// 黑先白先1-黑先2-白先
-	String filename = "C:\\官子sgf\\1K黑先自动应答题-如何破入白空.sgf";// sgf文件路径，请与填写信息匹配
-	String result = "1";// 结果1-不需选择2-净劫2-打劫
+	String duanwei = xmlData.getParamFromXml("duanwei");// 段位
+	String fenlei = xmlData.getParamFromXml("fenlei");// 试题分类1-死活2-布局3-定式4-中盘5-管子
+	String goal = xmlData.getParamFromXml("goal");// 计算目标1-计算2-判断3-攻防4-定式5-棋型6-价值7-大局
+	String tixing = xmlData.getParamFromXml("tixing");// 试题类型1-摆图2-选择4-自动应答
+	String first1 = xmlData.getParamFromXml("first1");// 黑先白先1-黑先2-白先
+	String filename = xmlData.getParamFromXml("filename");// sgf文件路径，请与填写信息匹配
+	String result = xmlData.getParamFromXml("result");// 结果1-不需选择2-净劫2-打劫
 	// 试题查询参数
-	String quizname = "如何破入白空";
+	String quizname = xmlData.getParamFromXml("quizname");
 	// 试题修改
-	String newfile = "C:\\官子sgf\\6D黑先自动应答，如何先手收取一路官子.sgf";
-	String newname = "试题名称修改";
+	String newfile = xmlData.getParamFromXml("newfile");
+	String newnamequiz = xmlData.getParamFromXml("newnamequiz");
 
 	@BeforeTest
-	public void beforeTest() {
-		// this.driver = new FirefoxDriver();
+	public void BeforeSuite() {
 		System.setProperty("webdriver.chrome.driver", "C:\\231\\chromedriver.exe");
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
-	}
-
-	@Test
-	public void QuizClassadd() {
-		// 登录
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
+	}
+	@Test
+	public void QuizClassadd() {
 		// 新增分类,首先判断同code是否存在
 		QuizClassList list = new QuizClassList(this.driver, QUIZCLASSurl);
 		if (list.getPaperSearchList1(code)) {
@@ -67,13 +66,9 @@ public class QuizTC {
 			list.WeblementExist(newclassname);
 		}
 	}
-
 	@Test(dependsOnMethods = { "QuizClassadd" })
 	// 前提分类添加成功，执行试题添加
 	public void Quizadd() {
-		// 登录
-		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
-		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		// 新增试题
 		QuizClassList add = new QuizClassList(this.driver, QUIZCLASSurl);
 		add.QuizAdd(code, duanwei, fenlei, goal, tixing, first1, filename, result, QuizListUrl);
@@ -81,32 +76,26 @@ public class QuizTC {
 		QuizListPage search = new QuizListPage(driver, QuizListUrl);
 		search.Exist(quizname, fenlei);
 	}
-
 	@Test(dependsOnMethods = { "Quizadd" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizmod() {
-		// 登录
-		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
-		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		// 修改试题
 		QuizListPage mod = new QuizListPage(driver, QuizListUrl);
-		mod.ModifyQuiz(quizname, fenlei, newfile, newname, QuizListUrl);
+		mod.ModifyQuiz(quizname, fenlei, newfile, newnamequiz, QuizListUrl);
 		this.driver.navigate().refresh();
 		// 修改完成检查是否修改
-		mod.Exist(newname, fenlei);
+		mod.Exist(newnamequiz, fenlei);
 	}
 	@Test(dependsOnMethods = { "Quizmod" })
 	// 前提试题添加成功，执行试题修改
 	public void Quizdel() {
-		// 登录
-		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
-		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		// 查询试题
 		QuizListPage del = new QuizListPage(driver, QuizListUrl);
-		del.SearchQuiz(newname, fenlei);
+		del.SearchQuiz(newnamequiz, fenlei);
 		// 删除
-		del.DelQuiz(newname, fenlei, newfile, newname, QuizListUrl);
+		del.DelQuiz(newnamequiz, fenlei, newfile, newnamequiz, QuizListUrl);
 	}
+
 	@AfterTest
 	public void afterTest() {
 		driver.quit();

@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Suite" parallel="false">
-  <test name="Test">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite" parallel="tests" thread-count="3">
+  <test verbose="2" preserve-order="true" name="PublicTest">
     <classes>
-      <class name="iqidaoTest.testCase.adminTestCase"/>
-      <class name="iqidaoTest.testCase.TestCase"/>
+      <class name="iqidaoTest.testCase.PublicNewsTC" />
     </classes>
   </test> <!-- Test -->
-</suite> <!-- Suite -->
+  <test verbose="2" preserve-order="true" name="quizmenu">  
+    <classes>
+      <class name="iqidaoTest.testCase.QuizTC" />
+    </classes>
+  </test> <!-- Test -->
+     <test verbose="2" preserve-order="true" name="Default test">
+    <classes>
+	   <class name="iqidaoTest.testCase.ActivityTC"/>
+	   <class name="iqidaoTest.testCase.ActivityUserTC"/>
+	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>
+    </classes>
+  </test> <!-- Default test -->
+</suite> <!-- Default suite -->
