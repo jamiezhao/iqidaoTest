@@ -12,6 +12,12 @@
     </classes>
   </test> <!-- Test -->
      <test verbose="2" preserve-order="true" name="Default test">
+	     <groups>
+          <dependencies>
+              <group name="AcitivityAddUser" depends-on="CreateActivity"/> 
+			  <group name="AcitivityPaperQuiz" depends-on="AcitivityAddUser"/> 
+          </dependencies>
+      </groups>
     <classes>
 	   <class name="iqidaoTest.testCase.ActivityTC"/>
 	   <class name="iqidaoTest.testCase.ActivityUserTC"/>
