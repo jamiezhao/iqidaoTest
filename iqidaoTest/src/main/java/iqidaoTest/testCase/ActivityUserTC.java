@@ -41,7 +41,7 @@ public class ActivityUserTC {
 	}
 	
 	//后台登录
-	@Test
+	@Test(groups = { "AcitivityAddUser" })
 	public void adminLogin(){
 		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);

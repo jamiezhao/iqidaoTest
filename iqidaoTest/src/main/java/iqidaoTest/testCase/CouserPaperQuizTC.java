@@ -40,7 +40,7 @@ public class CouserPaperQuizTC {
 	String orginselect2 = xmlData.getParamFromXml("orginselect2");
 	String newnamequiz = xmlData.getParamFromXml("newnamequiz");
 	@BeforeTest
-	public void BeforeSuite() {
+	public void BeforeTest() {
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
@@ -49,7 +49,7 @@ public class CouserPaperQuizTC {
 	}
 
 	// 添加试卷-课后题
-	@Test
+	@Test(groups = { "AcitivityPaperQuiz" })
 	public void ExercisesAfter() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -87,7 +87,7 @@ public class CouserPaperQuizTC {
 		del.Delquiz();
 	}
 
-	@Test
+	@Test(groups = { "AcitivityPaperQuiz" })
 	public void PreparePaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -121,7 +121,7 @@ public class CouserPaperQuizTC {
 		paperserach.ElementExist();
 	}
 
-	@Test
+	@Test(groups = { "AcitivityPaperQuiz" })
 	public void TeatPaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
