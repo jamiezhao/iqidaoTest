@@ -38,6 +38,7 @@ public class TestLogin {
 	String mytrainsUrl = "http://testing.iqidao.com/mytrainings";
 	String userName = "13811460080";
 	String passWord = "111111";
+	String activityPicture = "C:\\\\工作目录\\\\测试图片.png";
 	//发放用户优惠券
 	String couponUserName = "zl棋手80";
 	String couponPrice = "1";
@@ -226,7 +227,7 @@ public class TestLogin {
 		String expectedResult = activityName;
 		
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, url);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
 		String actualResult = activitysListPage.getFirstActivityName().getText();
 		System.out.println(actualResult);
 		

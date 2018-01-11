@@ -121,7 +121,7 @@ public class CreateActivityPage extends BasePage{
 	}
 	
 	
-	public ActivitysListPage createActivity(String activityName, String teacherName, String signupCount, String lowduan, String price, String signupStartTime, String signupEndTime, String activityStartTime, String activityEndTime, String redirectPageUrl){
+	public ActivitysListPage createActivity(String activityName, String teacherName, String activityPicture, String signupCount, String lowduan, String price, String signupStartTime, String signupEndTime, String activityStartTime, String activityEndTime, String redirectPageUrl){
 		this.getActivityNameTextField().sendKeys(activityName);
 		this.getActivityUserLimitTextField().sendKeys("10");
 		Select activityVersion = this.getActivityVersionSelect();
@@ -129,7 +129,7 @@ public class CreateActivityPage extends BasePage{
 		Select activityType = this.getActivityTypeSelect();
 		activityType.selectByValue("2");		//2为年级训练
 		this.setActivityTeacher(teacherName);
-		this.getActivityPictureField().sendKeys("C:\\工作目录\\测试图片.png");
+		this.getActivityPictureField().sendKeys(activityPicture);
 		this.getDescriptionTextField().sendKeys("this is activity's description");
 		this.getLowduanTextField().sendKeys(lowduan);
 		this.getSignupCountTextField().sendKeys(signupCount);

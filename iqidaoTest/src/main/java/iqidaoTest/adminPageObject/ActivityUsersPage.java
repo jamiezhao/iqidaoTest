@@ -34,8 +34,6 @@ public class ActivityUsersPage extends BasePage{
 				}
 				WebElement actualUserName = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 				String actualUserNameStr = actualUserName.getText();
-				System.out.println(actualUserNameStr);
-				System.out.println(activityUserName);
 				if(actualUserNameStr.equals(activityUserName)) {
 					flag = true;
 					break;

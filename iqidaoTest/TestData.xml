@@ -18,11 +18,13 @@
 	<login> 
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
-		<ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL>
+		<!-- <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> -->
+		<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL>
 	</login>
 	<activity>
 		<activityName name="活动名称">zlautoTest</activityName>
 		<teacherName name="主讲老师姓名">zl老师00</teacherName>
+		<activityPicture name="活动图片">C:\\工作目录\\测试图片.png</activityPicture>
 		<signupCount name="用户报名人数">0</signupCount>
 		<lowduan name="最低段位">-4</lowduan>
 		<price name="活动价格">1</price>
@@ -58,17 +60,20 @@
 		<goal name="目标">1</goal>
 		<tixing name="题型">4</tixing>
 		<first1 name="黑显白先">1</first1>
-		<filename name="文件路径">C:\\官子sgf\\1K黑先自动应答题-如何破入白空.sgf</filename>
+		<filename name="文件路径">C:\\工作目录\\1K黑先自动应答题-如何破入白空.sgf</filename>
+		<!-- <filename name="文件路径">C:\\官子sgf\\1K黑先自动应答题-如何破入白空.sgf</filename> -->
 		<result name="试题结果类型">1</result>
 		<quizname name="试题名称">如何破入白空</quizname>
-        <newfile name="修改试题名称">C:\\官子sgf\\6D黑先自动应答，如何全部收取四个一路扳？（思考对手反击）.sgf</newfile>
+        <!-- <newfile name="修改试题名称">C:\\官子sgf\\6D黑先自动应答，如何全部收取四个一路扳？（思考对手反击）.sgf</newfile> -->
+        <newfile name="修改试题名称">C:\\工作目录\\1.0黑先选择，挂角套路的交换.sgf</newfile>
         <newnamequiz name="修改试题名称">试题名称修改</newnamequiz>
 	</quiz>
 	<public>
 		<newname name="新闻名称">zjy_news</newname>
 		<modnewname name="修改新闻名称">zjy_mod</modnewname>
 		<newsclass name="类型">1</newsclass>
-		<fileurl name="封面路径">C:\\Users\\zhangjy\\Desktop\\教师登录.png</fileurl>
+		<fileurl name="封面路径">C:\\工作目录\\测试图片.png</fileurl>
+		<!-- <fileurl name="封面路径">C:\\Users\\zhangjy\\Desktop\\教师登录.png</fileurl> -->
 	</public>
 <paper>
 		<exameName name="课程-考试">分支9考试</exameName>

@@ -23,6 +23,7 @@ public class ActivityUserTC {
 	String activitysListUrl = xmlData.getParamFromXml("activitysListUrl");
 
 	//登录
+	String ChormeURL=xmlData.getParamFromXml("ChormeURL");
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	
@@ -34,7 +35,7 @@ public class ActivityUserTC {
 	@BeforeTest
 	public void beforeTest() {
 //		this.driver = new FirefoxDriver();
-		System.setProperty("webdriver.chrome.driver", "C:\\工作目录\\autoTest\\chromedriver33.exe");
+		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 	}
@@ -56,14 +57,12 @@ public class ActivityUserTC {
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		WebElement activityUsers = activitysListPage.getActivityUsersByName(activityName);
 		if(activityUsers != null) {
-			System.out.println("--click---------");
 			activityUsers.click();
 			this.driver.navigate().refresh();
 			String currentUrl = this.driver.getCurrentUrl();
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
 			activityUsersPage.addActivityUser(activityUserName);
 			boolean result = activityUsersPage.findActivityUserName(activityUserName);
-			System.out.println(result);
 			AssertJUnit.assertTrue(result);
 		}else {
 			AssertJUnit.assertTrue(false);

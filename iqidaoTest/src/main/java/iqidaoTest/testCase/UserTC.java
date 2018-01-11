@@ -27,6 +27,7 @@ public class UserTC {
 	String userCouponListUrl = xmlData.getParamFromXml("userCouponListUrl");
 	String usersListUrl = xmlData.getParamFromXml("usersListUrl");
 	//登录
+	String ChormeURL=xmlData.getParamFromXml("ChormeURL");
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	//发放用户优惠券
@@ -45,7 +46,7 @@ public class UserTC {
 	@BeforeTest
 	public void beforeTest() {
 //		this.driver = new FirefoxDriver();
-		System.setProperty("webdriver.chrome.driver", "C:\\工作目录\\autoTest\\chromedriver33.exe");
+		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 	}

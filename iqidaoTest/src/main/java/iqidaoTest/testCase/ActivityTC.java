@@ -1,5 +1,10 @@
 package iqidaoTest.testCase;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,9 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import iqidaoTest.Utils.CommonUtils;
 import iqidaoTest.Utils.xmlData;
-import iqidaoTest.adminPageObject.ActivityUsersPage;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
@@ -25,11 +28,13 @@ public class ActivityTC {
 	String createActivityUrl = xmlData.getParamFromXml("createActivityUrl");
 	String activitysListUrl = xmlData.getParamFromXml("activitysListUrl");
 	//登录
+	String ChormeURL=xmlData.getParamFromXml("ChormeURL");
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	//创建活动
 	String activityName = xmlData.getParamFromXml("activityName");
 	String teacherName = xmlData.getParamFromXml("teacherName");
+	String activityPicture = xmlData.getParamFromXml("activityPicture");
 	String signupCount = xmlData.getParamFromXml("signupCount");
 	String lowduan = xmlData.getParamFromXml("lowduan");
 	String price = xmlData.getParamFromXml("price");
@@ -51,7 +56,7 @@ public class ActivityTC {
 	
 	@BeforeTest
 	public void beforeTest() {
-		System.setProperty("webdriver.chrome.driver", "C:\\工作目录\\autoTest\\chromedriver33.exe");
+		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 	}
@@ -71,7 +76,7 @@ public class ActivityTC {
 	public void createActivity(){
 		String expectedResult = activityName;
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
 		String actualResult = activitysListPage.getFirstActivityName().getText();
 		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
