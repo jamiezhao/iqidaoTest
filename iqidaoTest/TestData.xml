@@ -19,7 +19,7 @@
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
 		<!-- <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> -->
-		<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL>
+		<ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL>
 	</login>
 	<activity>
 		<activityName name="活动名称">zlautoTest</activityName>
@@ -37,7 +37,15 @@
 		<itemName name="课程名称">第一课</itemName>
 		<itemStartTime name="课程开始时间">2018-01-16 19:30</itemStartTime>
 		<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>
+		<user1>
 		<activityUserName name="活动用户">zl棋手80</activityUserName>
+		</user1>
+		<user2>
+		<activityUserName name="活动用户">zl棋手81</activityUserName>
+		</user2>
+		<user3>
+		<activityUserName name="活动用户">zl棋手82</activityUserName>
+		</user3>
 	</activity>
 	<coupon>
 		<couponUserName name="优惠券用户">zl棋手80</couponUserName>

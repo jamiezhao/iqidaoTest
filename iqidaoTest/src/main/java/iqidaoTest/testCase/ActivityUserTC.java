@@ -29,7 +29,7 @@ public class ActivityUserTC {
 	
 	String activityName = xmlData.getParamFromXml("activityName");
 	//添加或删除活动用户
-	String activityUserName = xmlData.getParamFromXml("activityUserName");
+	String[] activityUserName = xmlData.getParamFromXml1("activityUserName");
 
 	
 	@BeforeTest
@@ -37,7 +37,7 @@ public class ActivityUserTC {
 //		this.driver = new FirefoxDriver();
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
-		this.driver.manage().window().maximize();
+		//this.driver.manage().window().maximize();
 	}
 	
 	//后台登录
@@ -58,13 +58,20 @@ public class ActivityUserTC {
 		WebElement activityUsers = activitysListPage.getActivityUsersByName(activityName);
 		if(activityUsers != null) {
 			activityUsers.click();
-			this.driver.navigate().refresh();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String currentUrl = this.driver.getCurrentUrl();
+			System.out.println("url" + currentUrl);
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
-			activityUsersPage.addActivityUser(activityUserName);
-			boolean result = activityUsersPage.findActivityUserName(activityUserName);
+			for (int i = 0; i < activityUserName.length; i++) {
+			activityUsersPage.addActivityUser(activityUserName[i]);
+			boolean result = activityUsersPage.findActivityUserName(activityUserName[i]);
 			AssertJUnit.assertTrue(result);
-		}else {
+		}}else {
 			AssertJUnit.assertTrue(false);
 		}
 		
@@ -81,8 +88,8 @@ public class ActivityUserTC {
 			this.driver.navigate().refresh();
 			String currentUrl = this.driver.getCurrentUrl();
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
-			activityUsersPage.deleteActivityUser(activityUserName);
-			boolean result = activityUsersPage.findActivityUserName(activityUserName);
+			activityUsersPage.deleteActivityUser(activityUserName[0]);
+			boolean result = activityUsersPage.findActivityUserName(activityUserName[0]);
 			AssertJUnit.assertTrue(!result);
 		}else {
 			AssertJUnit.assertTrue(false);
