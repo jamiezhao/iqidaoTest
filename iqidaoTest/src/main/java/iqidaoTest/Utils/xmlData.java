@@ -34,7 +34,7 @@ public class xmlData {
 		return paramValue;
 		
 	}
-	public static String[] getParamFromXml1(String paramName) {
+	public static String[] getParamArrayFromXml(String paramName) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;
 		String[] paramValue = null;

@@ -72,7 +72,7 @@ public class ActivityTC {
 	}
 	
 	//创建活动
-	@Test(dependsOnMethods = {"adminLogin"})
+	@Test(dependsOnMethods = {"adminLogin"},groups = { "CreateActivity" })
 	public void createActivity(){
 		String expectedResult = activityName;
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
@@ -82,7 +82,7 @@ public class ActivityTC {
 	}
 	
 	//创建赛季和课程
-	@Test(dependsOnMethods = {"createActivity"})
+	@Test(dependsOnMethods = {"createActivity"},groups = { "CreateActivity" })
 	public void createSeasonAndCourse() throws InterruptedException {
 		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		WebElement activityDetail = activityListPage.getActivityByName(activityName);

@@ -29,7 +29,7 @@ public class ActivityUserTC {
 	
 	String activityName = xmlData.getParamFromXml("activityName");
 	//添加或删除活动用户
-	String[] activityUserName = xmlData.getParamFromXml1("activityUserName");
+	String[] activityUserName = xmlData.getParamArrayFromXml("activityUserName");
 
 	
 	@BeforeTest
@@ -65,7 +65,6 @@ public class ActivityUserTC {
 				e.printStackTrace();
 			}
 			String currentUrl = this.driver.getCurrentUrl();
-			System.out.println("url" + currentUrl);
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
 			for (int i = 0; i < activityUserName.length; i++) {
 			activityUsersPage.addActivityUser(activityUserName[i]);
