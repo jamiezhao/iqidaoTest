@@ -1,12 +1,14 @@
 package iqidaoTest.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -32,5 +34,34 @@ public class xmlData {
 		return paramValue;
 		
 	}
+	public static String[] getParamArrayFromXml(String paramName) {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db;
+		String[] paramValue = null;
+		try {
+			db = dbf.newDocumentBuilder();
+			Document doc = db.parse("TestData.xml");
+			NodeList paramList = doc.getElementsByTagName(paramName);
+			ArrayList<Node> param = new ArrayList<Node>();
+			//List<String> param1 = new ArrayList<String>();
+			for (int i = 0; i < paramList.getLength(); i++) {
+				param.add(paramList.item(i));
+			}
+			int size = param.size();
+			String[] array=new String[size];
+			for (int i = 0; i < param.size(); i++) {
+				array[i]=(String)param.get(i).getFirstChild().getNodeValue();
+				paramValue=array;
+			}
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return paramValue;
 
+
+	}
 }
