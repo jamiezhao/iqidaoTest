@@ -23,7 +23,7 @@
 	   <class name="iqidaoTest.testCase.ActivityTC"/>
 	   <class name="iqidaoTest.testCase.ActivityUserTC"/>
 	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>
-	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>	   
+	   <class name="iqidaoTest.testCase.ExchangeClassTC"/>	   
     </classes>
   </test> <!-- Default test -->
 </suite> <!-- Default suite -->
