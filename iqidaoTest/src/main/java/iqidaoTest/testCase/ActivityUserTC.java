@@ -30,7 +30,7 @@ public class ActivityUserTC {
 	
 	String activityName = xmlData.getParamFromXml("activityName");
 	//添加或删除活动用户
-	List<String> activityUserNames = xmlData.getParamsFromXml("activityUserNames");
+	String[] activityUserName = xmlData.getParamArrayFromXml("activityUserName");
 
 	
 	@BeforeTest
@@ -43,7 +43,6 @@ public class ActivityUserTC {
 	
 	//后台登录
 	@Test(groups = { "AcitivityAddUser" })
-//	@Test
 	public void adminLogin(){
 		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
@@ -53,8 +52,8 @@ public class ActivityUserTC {
 	}
 	
 	//手工添加活动用户
-	@Test(dependsOnMethods = {"createSeasonAndCourse"})
-//	@Test(dependsOnMethods = {"adminLogin"})
+	//@Test(dependsOnMethods = {"createSeasonAndCourse"})
+	@Test(dependsOnMethods = {"adminLogin"})
 	public void addActivityUser() {
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		WebElement activityUsers = activitysListPage.getActivityUsersByName(activityName);
@@ -68,16 +67,15 @@ public class ActivityUserTC {
 			}
 			String currentUrl = this.driver.getCurrentUrl();
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
-			for (int i = 0; i < activityUserNames.size(); i++) {
-			activityUsersPage.addActivityUser(activityUserNames.get(i));
-			boolean result = activityUsersPage.findActivityUserName(activityUserNames.get(i));
+			for (int i = 0; i < activityUserName.length; i++){
+			activityUsersPage.addActivityUser(activityUserName[i]);
+			boolean result = activityUsersPage.findActivityUserName(activityUserName[i]);
 			AssertJUnit.assertTrue(result);
 			}
 		}else {
 			AssertJUnit.assertTrue(false);
 		}
-		
-		
+			
 	}
 	
 	//手动删除活动用户
@@ -90,8 +88,8 @@ public class ActivityUserTC {
 			this.driver.navigate().refresh();
 			String currentUrl = this.driver.getCurrentUrl();
 			ActivityUsersPage activityUsersPage = new ActivityUsersPage(this.driver, currentUrl);
-			activityUsersPage.deleteActivityUser(activityUserNames.get(0));
-			boolean result = activityUsersPage.findActivityUserName(activityUserNames.get(0));
+			activityUsersPage.deleteActivityUser(activityUserName[0]);
+			boolean result = activityUsersPage.findActivityUserName(activityUserName[0]);
 			AssertJUnit.assertTrue(!result);
 		}else {
 			AssertJUnit.assertTrue(false);
