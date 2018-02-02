@@ -12,14 +12,15 @@
 	<paperSearchUrl>http://testing.iqidao.com/admin001/papers</paperSearchUrl>
 	<QuizClassUrl>http://testing.iqidao.com/admin001/quiz/classes</QuizClassUrl>
 	<QuizListUrl>http://testing.iqidao.com/admin001/quizzes</QuizListUrl>
-
+	<ExClassUrl>http://testing.iqidao.com/admin001/order/switch</ExClassUrl>
+	
 </urls>
 <params>
 	<login> 
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
 		<!-- <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> -->
-		<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL>
+		<ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL>
 	</login>
 	<activity>
 		<activityName name="活动名称">zlautotest</activityName>
@@ -37,11 +38,9 @@
 		<itemName name="课程名称">第一课</itemName>
 		<itemStartTime name="课程开始时间">2018-01-16 19:30</itemStartTime>
 		<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>
-		<activityUserNames>
-			<user1>zl棋手200</user1>
-			<user2>zl棋手201</user2>
-			<user3>zl棋手202</user3>
-		</activityUserNames>
+-		<activityUserName name="活动用户">zl棋手80</activityUserName>
+-		<activityUserName name="活动用户">zl棋手81</activityUserName>
+-		<activityUserName name="活动用户">zl棋手82</activityUserName>
 	</activity>
 	<coupon>
 		<couponUserName name="优惠券用户">zl棋手80</couponUserName>
@@ -85,7 +84,10 @@
 		<orginselect1 name="orginselect1">2</orginselect1>
 		<orginselect2 name="orginselect2">1</orginselect2>
 </paper>
-
+<exchangeclass>
+		<ToActivityName name="目的活动">活动测试</ToActivityName>
+		<ToSeason name="目的活动赛季">赛季一</ToSeason>
+</exchangeclass>
 </params>
 </testcases>
 

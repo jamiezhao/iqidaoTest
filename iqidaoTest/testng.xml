@@ -16,12 +16,14 @@
           <dependencies>
               <group name="AcitivityAddUser" depends-on="CreateActivity"/> 
 			  <group name="AcitivityPaperQuiz" depends-on="AcitivityAddUser"/> 
+			  <group name="ExClass" depends-on="AcitivityAddUser"/> 			  
           </dependencies>
       </groups>
     <classes>
 	   <class name="iqidaoTest.testCase.ActivityTC"/>
 	   <class name="iqidaoTest.testCase.ActivityUserTC"/>
 	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>
+	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>	   
     </classes>
   </test> <!-- Default test -->
 </suite> <!-- Default suite -->
