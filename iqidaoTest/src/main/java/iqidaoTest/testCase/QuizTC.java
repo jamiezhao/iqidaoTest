@@ -74,7 +74,7 @@ public class QuizTC {
 	// 前提分类添加成功，执行试题添加
 	public void QuizAdd() {
 		// 新增试题
-		QuizClassListPage add = new QuizClassListPage(this.driver, QuizClassUrl);
+		QuizClassListPage add = new QuizClassListPage(this.driver, QuizListUrl);
 		add.QuizAdd(code, duanwei, fenlei, goal, tixing, first1, filename, result, QuizListUrl);
 		// 新增试题完毕，点击查询，检查是否添加成功
 		QuizListPage search = new QuizListPage(driver, QuizListUrl);
