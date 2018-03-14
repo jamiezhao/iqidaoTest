@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UserCouponsPage extends BasePage {
-	private int userCouponTableRows = 20;
 
 	public UserCouponsPage(WebDriver driver, String url) {
 		super(driver);
