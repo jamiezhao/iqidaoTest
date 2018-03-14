@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default suite" parallel="tests" thread-count="3">
-  <listeners>
-        <listener class-name="iqidaoTest.Utils.OverrideIAnnotationTransformer"></listener>
-    </listeners>
+     <listeners>
+       <listener class-name="iqidaoTest.Utils.OverrideIAnnotationTransformer" />
+       <listener class-name="org.uncommons.reportng.HTMLReporter" />
+       <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+     </listeners>
   <test verbose="2" preserve-order="true" name="PublicTest">
     <classes>
       <class name="iqidaoTest.testCase.PublicNewsTC" />
@@ -13,7 +15,7 @@
     <classes>
       <class name="iqidaoTest.testCase.QuizTC" />
     </classes>
-  </test> Test
+  </test> 
      <test verbose="2" preserve-order="true" name="Default test">
 	     <groups>
           <dependencies>
@@ -28,5 +30,5 @@
 	   <class name="iqidaoTest.testCase.CouserPaperQuizTC"/>
 	   <class name="iqidaoTest.testCase.ExchangeClassTC"/>	   
     </classes>
-  </test> Default test
+  </test> 
 </suite> <!-- Default suite -->
