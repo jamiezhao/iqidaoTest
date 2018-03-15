@@ -22,11 +22,11 @@ public class QuizListPage extends BasePage {
 	By TypeLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[2]/div[1]/select");
 	By SearchButtonLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[4]/div[3]/div/button");
 	// 修改界面元素定位
-	By SgfEditLoactor = By.xpath("//*[@id='edit-quiz']/div[2]/div/div[8]/div/div/div[1]/input");
+	By SgfEditLoactor = By.xpath("//*[@id='edit-quiz']/div[2]/div/div[4]/div/div/div[1]/input");
 	By nameEditLoactor = By.xpath("//*[@id='edit-quiz']/div[2]/div/div[1]/div[1]/input");
 	By SaveLoactor = By.xpath("//*[@id='edit-quiz']/div[3]/button[2]");
 	//删除界面元素定位
-	By DelLoactor = By.xpath("//*[@id='quiz-list']/tbody/tr[1]/td[11]/a[1]");
+	By DelLoactor = By.xpath("//*[@id='quiz-list']/tbody/tr[1]/td[10]/a[1]");
 	By ConfirmLoactor = By.id("delete-confirm");
 
 	
@@ -116,19 +116,7 @@ public class QuizListPage extends BasePage {
 		getQuizSearchList(quizname);
 		this.getnameEditLoactor().clear();
 		this.getnameEditLoactor().sendKeys(newname);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.getSgfEditLoactor().sendKeys(newfile);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.getSaveLoactor().click();
 		try {
 			Thread.sleep(2000);
