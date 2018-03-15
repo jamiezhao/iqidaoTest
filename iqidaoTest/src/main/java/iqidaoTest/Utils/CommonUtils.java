@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.Test;
-
 public class CommonUtils {
 	
 	public static String DatetoString(Date date){

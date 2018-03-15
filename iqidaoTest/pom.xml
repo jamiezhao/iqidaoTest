@@ -75,6 +75,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.7.1</version>
                 <configuration>
+                	<!--失败后是否继续执行-->
+                	<testFailureIgnore>true</testFailureIgnore>
                     <!--<testFailureIgnore>true</testFailureIgnore>-->
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
