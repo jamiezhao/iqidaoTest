@@ -1,5 +1,6 @@
 package iqidaoTest.Utils;
 
+import org.apache.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 

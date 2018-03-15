@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import iqidaoTest.adminPageObject.BasePage;
+import iqidaoTest.testCase.Log4jTest;
 
 public class ExClassList extends BasePage {
 

@@ -63,7 +63,7 @@ public class UserTC {
 	
 	
 	//发放用户优惠券
-	@Test(dependsOnMethods = {"adminLogin"})
+	@Test(dependsOnMethods = {"createSeasonAndCourse"})
 	public void sendUserCoupon() {
 		UserCouponsPage userCouponsPage = new UserCouponsPage(this.driver, userCouponListUrl);
 		userCouponsPage.addUserCoupon(couponUserName, couponPrice, couponStartTime, couponEndTime);
