@@ -58,7 +58,7 @@ public class QuizTC {
 	public void QuizClassAdd() {
 		// 新增分类,首先判断同code是否存在
 		QuizClassListPage list = new QuizClassListPage(this.driver, QuizClassUrl);
-		if (list.getPaperSearchList1(code)) {
+		if (list.getQuizClass1(code)) {
 			// 存在则不添加
 			System.out.println("已存在不需要添加分类");
 		} else {
@@ -70,11 +70,11 @@ public class QuizTC {
 			list.WeblementExist(newclassname);
 		}
 	}
-	@Test//(dependsOnMethods = { "QuizClassAdd" })
+	@Test(dependsOnMethods = { "QuizClassAdd" })
 	// 前提分类添加成功，执行试题添加
 	public void QuizAdd() {
 		// 新增试题
-		QuizClassListPage add = new QuizClassListPage(this.driver, QuizListUrl);
+		QuizClassListPage add = new QuizClassListPage(this.driver, QuizClassUrl);
 		add.QuizAdd(code, duanwei, fenlei, goal, tixing, first1, filename, result, QuizListUrl);
 		// 新增试题完毕，点击查询，检查是否添加成功
 		QuizListPage search = new QuizListPage(driver, QuizListUrl);
@@ -100,8 +100,8 @@ public class QuizTC {
 		del.DelQuiz(newnamequiz, fenlei, newfile, newnamequiz, QuizListUrl);
 	}
 
-	@AfterTest
+	/*@AfterTest
 	public void afterTest() {
 		driver.quit();
-	}
+	}*/
 }

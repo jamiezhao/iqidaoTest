@@ -26,8 +26,9 @@ public class QuizClassListPage extends BasePage {
 	By QuizAddLoactor = By.xpath("/html/body/div/div/section[2]/div/header/h3/a");
 	By QuizTypeLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[1]/div[1]/select");
 	By DergeeLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[2]/div[1]/input");
+	By DaYuLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[1]/div[2]/select");
 	By QuizClassLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[1]/div[2]/select");
-	By QuizGoallLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[2]/div[2]/select");
+	By QuizGoallLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[2]/div[3]/select");
 	By TypeLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[1]/div[3]/select");
 	By ResultLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[2]/div[3]/select");
 	By WhiteBlackLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[2]/div[4]/select");
@@ -35,7 +36,7 @@ public class QuizClassListPage extends BasePage {
 	By SgfLoactor = By.xpath("//*[@id='addquiz']/form/div[2]/div/div[3]/div/div/div[1]/input");
 	By SaveButtonLoactor = By.xpath("//*[@id='addquiz']/form/div[3]/button[2]");
 	// 试题列表菜单
-	By QuizMenuLoactor = By.xpath("/html/body/div/aside/section/ul/li[5]/ul/li[2]/a/span");
+	By QuizMenuLoactor = By.xpath("/html/body/div/aside/section/ul/li[5]/ul/li[3]/a/span");
 
 	// 返回属性
 	public WebElement getNameSEARCHLoactor() {
@@ -45,7 +46,10 @@ public class QuizClassListPage extends BasePage {
 	public WebElement getSearchButtonLoactor() {
 		return this.dr.findElement(SearchButtonLoactor);
 	}
-
+	public Select getDaYuLoactor() {
+		Select dayu = new Select(this.dr.findElement(DaYuLoactor));
+		return dayu;
+	}
 	public WebElement getQuizAddLoactor() {
 		return this.dr.findElement(QuizAddLoactor);
 	}
@@ -117,7 +121,7 @@ public class QuizClassListPage extends BasePage {
 		// 首先执行查询方法
 		SearchQuizClass(quizclassname);
 		// 遍历数据表，检查返回值
-		if (getPaperSearchList(quizclassname)) {
+		if (getQuizClass(quizclassname)) {
 			System.out.println("数据存在，添加成功");
 		} else {
 			System.out.println("数据不存在，添加失败");
@@ -126,11 +130,11 @@ public class QuizClassListPage extends BasePage {
 	}
 
 	// 获取当前查询数据-遍历列表
-	public boolean getPaperSearchList(String quizclassname) {
+	public boolean getQuizClass(String quizclassname) {
 		boolean flag = false;
 		for (int row = 1; row < TableRows + 1; row++) {
-			WebElement actualPaperName = this.dr
-					.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + row + "]/td[2]/a"));
+			//WebElement actualPaperName = this.dr.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + row + "]/td[2]/a"));
+			WebElement actualPaperName = this.dr.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[2]/a"));
 			if (actualPaperName.getText().contains(quizclassname)) {
 				flag = true;
 				actualPaperName.click();
@@ -145,16 +149,16 @@ public class QuizClassListPage extends BasePage {
 	}
 
 	// 获取当前查询数据-遍历列表
-	public boolean getPaperSearchList1(String code) {
+	public boolean getQuizClass1(String code) {
 		boolean flag = false;
 		try {
 			for (int row = 1; row < TableRows + 1; row++) {
 				WebElement actualcodeName = this.dr
-						.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + row + "]/td[3]"));
+						.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 				if (actualcodeName.getText().contains(code)) {
 					int tr = row;
 					WebElement actualclassName = this.dr
-							.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + tr + "]/td[2]"));
+							.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + tr + "]/td[2]"));
 					flag = true;
 					break;
 				}
@@ -174,10 +178,10 @@ public class QuizClassListPage extends BasePage {
 			String filename, String result, String PageUrl) {
 		for (int row = 1; row < TableRows + 1; row++) {
 			WebElement actualcodeName = this.dr
-					.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + row + "]/td[3]"));
+					.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 			if (actualcodeName.getText().contains(code)) {
 				String actualclassName = this.dr
-						.findElement(By.xpath("//*[@id='classes-list']/tbody/tr[" + row + "]/td[2]")).getText();
+						.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[2]")).getText();
 				// 通过查询出试题分类名称，进入新增试题菜单，新增试题
 				// 切换菜单
 				this.getQuizMenuLoactor().click();
@@ -193,6 +197,9 @@ public class QuizClassListPage extends BasePage {
 				Select classes = this.getQuizTypeLoactor();
 				classes.selectByVisibleText(actualclassName);
 				this.getDergeeLoactor().sendKeys(duanwei);
+				Select dayu = this.getDaYuLoactor();
+				// 大域1-死活2-布局3-定式4-中盘5-管子
+				dayu.selectByValue(fenlei);
 				Select classchoose = this.getQuizClassLoactor();
 				// 试题分类1-死活2-布局3-定式4-中盘5-管子
 				classchoose.selectByValue(fenlei);
