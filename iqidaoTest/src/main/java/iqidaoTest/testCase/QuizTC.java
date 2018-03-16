@@ -2,8 +2,8 @@ package iqidaoTest.testCase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -51,8 +51,11 @@ public class QuizTC {
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
+		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
+		String actualResult = adminHomePage.getTitleText();
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
 	@Test
 	public void QuizClassAdd() {
@@ -99,9 +102,8 @@ public class QuizTC {
 		// 删除
 		del.DelQuiz(newnamequiz, fenlei, newfile, newnamequiz, QuizListUrl);
 	}
-
-	/*@AfterTest
+	@AfterTest
 	public void afterTest() {
 		driver.quit();
-	}*/
+	}
 }

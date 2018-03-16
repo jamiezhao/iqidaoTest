@@ -19,7 +19,7 @@
 	<login> 
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
-		<!-- <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> -->
+		<!-- <ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL> -->
 		<ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL>
 	</login>
 	<activity>

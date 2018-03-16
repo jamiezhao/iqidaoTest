@@ -4,17 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import iqidaoTest.CoursePaper.SwitchTo;
 import iqidaoTest.PublicColumnObject.PublicColumnAddPage;
 import iqidaoTest.PublicColumnObject.PublicColumnListPage;
+import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
-import iqidaoTest.Utils.CommonUtils;
-import iqidaoTest.Utils.xmlData;
 
 public class PublicNewsTC {
 	private WebDriver driver;
@@ -37,8 +35,11 @@ public class PublicNewsTC {
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
+		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
+		String actualResult = adminHomePage.getTitleText();
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
 	@Test
 	//添加新信息

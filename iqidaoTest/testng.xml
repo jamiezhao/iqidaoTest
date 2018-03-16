@@ -16,7 +16,7 @@
       <class name="iqidaoTest.testCase.QuizTC" />
     </classes>
   </test> 
-     <test verbose="2" preserve-order="true" name="Default test">
+     <test verbose="2" preserve-order="true" name="acitivity">
 	     <groups>
           <dependencies>
               <group name="AcitivityAddUser" depends-on="CreateActivity"/> 

@@ -1,21 +1,15 @@
 package iqidaoTest.testCase;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import iqidaoTest.Utils.CommonUtils;
 import iqidaoTest.Utils.xmlData;
-import iqidaoTest.adminPageObject.ActivityUsersPage;
-import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
-import iqidaoTest.adminPageObject.CreateActivityPage;
-import iqidaoTest.adminPageObject.CreateSeasonPage;
 import iqidaoTest.adminPageObject.UserCouponsPage;
 import iqidaoTest.adminPageObject.UsersListPage;
 
@@ -63,7 +57,7 @@ public class UserTC {
 	
 	
 	//发放用户优惠券
-	@Test(dependsOnMethods = {"createSeasonAndCourse"})
+	@Test(dependsOnMethods = {"adminLogin"})
 	public void sendUserCoupon() {
 		UserCouponsPage userCouponsPage = new UserCouponsPage(this.driver, userCouponListUrl);
 		userCouponsPage.addUserCoupon(couponUserName, couponPrice, couponStartTime, couponEndTime);
