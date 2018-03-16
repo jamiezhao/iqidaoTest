@@ -27,7 +27,7 @@ private WebDriver driver;
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	//换班数据
-	String ExUserName=xmlData.getParamFromXml("activityUserName");
+	String[]  ExUserName=xmlData.getParamArrayFromXml("activityUserName");
 	String OriginActivityName=xmlData.getParamFromXml("activityName");
 	String OriginSeason=xmlData.getParamFromXml("seasonName");
 	String ToActivityName=xmlData.getParamFromXml("ToActivityName");
@@ -49,10 +49,10 @@ private WebDriver driver;
 	//添加换班信息
 	public void ExClass(){
 		ExClassPage exclass=new ExClassPage(driver,ExClassUrl);
-		exclass.AddExClass(ExUserName, OriginActivityName, OriginSeason, ToActivityName, ToSeason);
+		exclass.AddExClass(ExUserName[2], OriginActivityName, OriginSeason, ToActivityName, ToSeason);
 		//判断是否添加成功
 		ExClassList searsh=new ExClassList(driver,ExClassUrl);
-		searsh.ElementExist(ExUserName, OriginActivityName, ToActivityName);
+		searsh.ElementExist(ExUserName[2], OriginActivityName, ToActivityName);
 	}
 	@AfterTest
 	public void afterTest() {
