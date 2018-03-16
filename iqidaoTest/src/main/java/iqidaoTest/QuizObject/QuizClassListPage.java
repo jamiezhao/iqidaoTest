@@ -1,12 +1,10 @@
 package iqidaoTest.QuizObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.BasePage;
 
 public class QuizClassListPage extends BasePage {
@@ -156,9 +154,6 @@ public class QuizClassListPage extends BasePage {
 				WebElement actualcodeName = this.dr
 						.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[3]"));
 				if (actualcodeName.getText().contains(code)) {
-					int tr = row;
-					WebElement actualclassName = this.dr
-							.findElement(By.xpath("/html/body/div/div/section[2]/div/div/div[1]/div[1]/table/tbody/tr[" + tr + "]/td[2]"));
 					flag = true;
 					break;
 				}

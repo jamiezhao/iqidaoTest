@@ -3,6 +3,7 @@ package iqidaoTest.testCase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -37,9 +38,12 @@ private WebDriver driver;
 		setlog.SetLogInfo();
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
-		//this.driver.manage().window().maximize();
+		this.driver.manage().window().maximize();
+		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
+		String actualResult = adminHomePage.getTitleText();
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
 	@Test(groups = { "ExClass" })
 	//添加换班信息

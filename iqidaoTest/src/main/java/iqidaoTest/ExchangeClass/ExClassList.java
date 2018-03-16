@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import iqidaoTest.adminPageObject.BasePage;
-import iqidaoTest.testCase.Log4jTest;
 
 public class ExClassList extends BasePage {
 
@@ -17,7 +16,6 @@ public class ExClassList extends BasePage {
 		this.url=url;
 		this.goTo();
 	}
-	private int TableRows=20;
 	 Logger log = Logger.getLogger(ExClassList.class);  
 	//查询
 		By UserSearchLoactor = By.xpath("/html/body/div/div/section[2]/div/div[1]/form/div[1]/div/span/span[1]/span");
@@ -110,7 +108,6 @@ public class ExClassList extends BasePage {
 			//先执行查询功能
 			SearchList(username,originactivityname,toactivityname);
 			//检查数据是否存在
-			boolean flag = false; 
 			try{
 				 this.dr.findElement(By.xpath("//*[@class='x-scroll']/table/tbody/tr[1]/td[1]"));
 			     log.info("找到记录，换班记录添加成功");  

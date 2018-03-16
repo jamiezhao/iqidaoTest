@@ -1,9 +1,5 @@
 package iqidaoTest.CoursePaper;
 
-import java.lang.reflect.Field;
-import java.util.Set;
-
-import org.apache.commons.codec.EncoderException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
