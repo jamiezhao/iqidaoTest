@@ -19,7 +19,7 @@ public class PaperListPage extends BasePage {
 	By NameSearchLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[1]/div/input");
 	By OriginSearchLoactor = By.name("paperSrcId");
 	By SearchButtonLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[6]/div/div/input");
-	By QuizDelLoactor = By.xpath("//*[@id='paperQuiz']/tbody/tr[1]/td[14]");
+	By QuizDelLoactor = By.xpath("//*[@id='paperQuiz']/tbody/tr[1]/td[15]/a");
 	By ConfirmButtonLoactor = By.id("delete-confirm");
 	// 返回属性
 	public WebElement getNameSearchLoactor() {
@@ -73,6 +73,12 @@ public class PaperListPage extends BasePage {
 	}
 	//删除功能检查
 	public String Delquiz() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.getQuizDelLoactor().click();
 		try {
 			Thread.sleep(2000);

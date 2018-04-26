@@ -16,13 +16,13 @@ public class CourseQuizAddPage extends BasePage {
 	}
 
 	// 新增界面定位元素
-	By QuizAddLoactor = By.xpath("//*[@id='quiz-query']/div/div[9]/a[1]");
+	By QuizAddLoactor = By.xpath("/html/body/div/div/section[2]/section/header/div/a[1]");
 	// By QuizSearchLoactor = By.linkText("查询");
 	By NameSearchLoactor = By.xpath("//*[@id='query_paperQuiz']/div[1]/div/div/input");	
 	By DegreeSearchLoactor = By.name("duanLower");
 	By DegreeSearch1Loactor = By.name("duanUpper");
 	By ClassSearchLoactor = By.xpath("//*[@id='query_paperQuiz']/div[6]/div/div/select");
-	By QuizSearchLoactor = By.xpath("//*[@id='query_paperQuiz']/div[8]/a");
+	By QuizSearchLoactor = By.xpath("//*[@id='query_paperQuiz']/div[10]/a");
 	By AllSelectLoactor = By.xpath("//*[@id='paperQuiz-list']/thead/tr/th[1]/div/label/span/span");
 	By QuizSaveLoactor = By.id("paperQuiz-submit");
 	By PassScoreLoactor = By.name("passScore");
