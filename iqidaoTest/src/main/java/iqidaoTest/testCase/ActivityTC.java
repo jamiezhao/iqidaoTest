@@ -100,8 +100,8 @@ public class ActivityTC {
 	}
 	
 	
-	@AfterTest
+	/*@AfterTest
 	public void afterTest() {
 		this.driver.close();
-	}
+	}*/
 }

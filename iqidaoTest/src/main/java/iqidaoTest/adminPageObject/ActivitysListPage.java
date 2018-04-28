@@ -18,11 +18,9 @@ public class ActivitysListPage extends BasePage{
 	By activityListMenuLocator = By.xpath("html/body/div[1]/aside/section/ul/li[1]/ul/li/a/span");
 	
 	By createActivityLocator = By.linkText("创建活动");
-	
 	public WebElement getFirstActivityName(){
 		return this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[1]/td[4]/a"));
 	}
-
 	public String getActivityUrlByName(String activityName) {
 		boolean flag = false; 
 		for(int row = 1; row < activitiesTableRows + 1; row++) {
@@ -65,6 +63,4 @@ public class ActivitysListPage extends BasePage{
 		}
 		return activityUsers;
 	}
-	
-
 }

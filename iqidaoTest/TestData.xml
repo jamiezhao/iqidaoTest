@@ -4,7 +4,7 @@
 
 	<adminLoginUrl>http://testing.iqidao.com/admin001</adminLoginUrl>
 	<adminHomeUrl>http://testing.iqidao.com/admin001/home</adminHomeUrl>
-	<createActivityUrl>http://testing.iqidao.com/admin001/activity/post</createActivityUrl>
+	<createActivityUrl>http://testing.iqidao.com/admin001/activity/create</createActivityUrl>
 	<activitysListUrl>http://testing.iqidao.com/admin001/activities</activitysListUrl>
 	<userCouponListUrl>http://testing.iqidao.com/admin001/coupon/user</userCouponListUrl>
 	<usersListUrl>http://testing.iqidao.com/admin001/users</usersListUrl>
@@ -13,19 +13,20 @@
 	<QuizClassUrl>http://testing.iqidao.com/admin001/quiz/classes</QuizClassUrl>
 	<QuizListUrl>http://testing.iqidao.com/admin001/quizzes</QuizListUrl>
 	<ExClassUrl>http://testing.iqidao.com/admin001/order/switch</ExClassUrl>
-	
+	<CmoboListUrl>http://testing.iqidao.com/admin001/activity/combo</CmoboListUrl>
 </urls>
 <params>
 	<login> 
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
-		<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL> 
-		<!-- <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> -->
+		<!--<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL> -->
+		 <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> 
 	</login>
 	<activity>
 		<activityName name="活动名称">zlautotest</activityName>
 		<teacherName name="主讲老师姓名">zl老师00</teacherName>
-		<activityPicture name="活动图片">C:\\工作目录\\测试图片.png</activityPicture>
+		<!--<activityPicture name="活动图片">C:\\工作目录\\测试图片.png</activityPicture> -->
+     	<activityPicture name="活动图片">C:\\Users\\zhangjy\\Pictures\\aa.jpg</activityPicture>
 		<signupCount name="用户报名人数">0</signupCount>
 		<lowduan name="最低段位">-4</lowduan>
 		<price name="活动价格">1</price>
@@ -75,8 +76,8 @@
 		<newname name="新闻名称">zjy_news</newname>
 		<modnewname name="修改新闻名称">zjy_mod</modnewname>
 		<newsclass name="类型">1</newsclass>
-		<fileurl name="封面路径">C:\\工作目录\\测试图片.png</fileurl>
-		<!-- <fileurl name="封面路径">C:\\Users\\zhangjy\\Desktop\\教师登录.png</fileurl> -->
+		<!--<fileurl name="封面路径">C:\\工作目录\\测试图片.png</fileurl>-->
+		 <fileurl name="封面路径">C:\\Users\\zhangjy\\Desktop\\aa.jpg</fileurl> 
 	</public>
 <paper>
 		<exameName name="课程-考试">分支9考试</exameName>
@@ -88,6 +89,23 @@
 		<ToActivityName name="目的活动">活动测试</ToActivityName>
 		<ToSeason name="目的活动赛季">赛季一</ToSeason>
 </exchangeclass>
+<cmobo>
+		<Comboname name="续报组合名称">autotest续报组合1</Comboname>
+		<Originalprice name="原价">200</Originalprice>
+		<Nowprice name="现价">0</Nowprice>
+		<Registnum name="限制名额">100</Registnum>
+		<note name="续报备注信息">自动化案例添加续报</note>	
+		<Combonamemod name="续报名称修改">autotest续报组合1_mod</Combonamemod>	
+		<notemodmod name="续报备注信息修改">自动化案例添加续报_mod</notemodmod>	
+		<nowpricemod name="现价格修改">200</nowpricemod>		
+		<combostartime name="活动中续报展示时间">2018-04-27 18:14</combostartime>		
+		<comboendtime name="活动中续报展示时间">2019-04-27 18:14</comboendtime>				
+</cmobo>
+		<testpassscore name="入学测通过分数">80</testpassscore>				
+		<viewscoretime name="入学测可查分数时间">2018-04-27 18:14</viewscoretime>				
+		<dividetime name="入学测分班时间">2018-04-27 18:14</dividetime>				
+<testactivity>
+</testactivity>
 </params>
 </testcases>
 

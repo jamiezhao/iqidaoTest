@@ -34,17 +34,22 @@ public class CreateActivityPage extends BasePage {
 	By activityEndTimeLocator = By.name("endTime");
 	By activityquarterLocator = By.name("quarter");
 	By enableSignupLocator = By
-			.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[4]/div/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[2]/div/label/span");
 	By enableOnlineLocator = By
-			.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[5]/div/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[1]/div/label/span");
 	By enableCouponLocator = By
-			.xpath("html/body/div[1]/div/section[2]/section/form/div[1]/div[3]/div[6]/div/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[3]/div/label/span");
+	By enableSMSLocator = By
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[4]/div/label/span");
+	By enablecomboLocator = By
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[5]/div/label/span");
+	By enablesignTestLocator = By
+			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[6]/div/label/span");
 	By submitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[2]/button");
 
 	public WebElement getActivityNameTextField() {
 		return this.dr.findElement(activityNameLocator);
 	}
-
 	public WebElement getActivityUserLimitTextField() {
 		return this.dr.findElement(activityUserLimitLocator);
 	}
@@ -130,11 +135,18 @@ public class CreateActivityPage extends BasePage {
 	public WebElement getEnableCouponButton() {
 		return this.dr.findElement(enableCouponLocator);
 	}
-
+	public WebElement getenableSMSButton() {
+		return this.dr.findElement(enableSMSLocator);
+	}
+	public WebElement getenablecomboButton() {
+		return this.dr.findElement(enablecomboLocator);
+	}
+	public WebElement getenablesignTestButton() {
+		return this.dr.findElement(enablesignTestLocator);
+	}
 	public WebElement getSubmitButton() {
 		return this.dr.findElement(submitButtonLocator);
 	}
-
 	public ActivitysListPage createActivity(String activityName, String teacherName, String activityPicture,
 			String signupCount, String lowduan, String price, String signupStartTime, String signupEndTime,
 			String activityStartTime, String activityEndTime, String redirectPageUrl) {
@@ -168,6 +180,9 @@ public class CreateActivityPage extends BasePage {
 		this.getEnableSignupButton().click();
 		this.getEnableOnlineButton().click();
 		this.getEnableCouponButton().click();
+		this.getenableSMSButton().click();
+		this.getenablecomboButton().click();
+		this.getenablesignTestButton().click();
 		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
 		js2.executeScript("arguments[0].scrollIntoView(true);", this.getSubmitButton());
 		this.getSubmitButton().click();
