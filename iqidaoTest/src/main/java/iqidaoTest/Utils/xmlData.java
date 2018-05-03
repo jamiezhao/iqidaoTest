@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -65,21 +66,26 @@ public class xmlData {
 		return paramValue;
 	}
 	
-	public static List<String> getParamsFromXml(String paramName) {
+	public static List<String> getParamsFromXml(String paramName, int n) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;
 		List<String> paramValueList = new ArrayList<String>();
 		try {
 			db = dbf.newDocumentBuilder();
 			Document doc = db.parse("TestData.xml");
+			//获取一级标签，放入列表
 			NodeList paramList = doc.getElementsByTagName(paramName);
-			Node param = paramList.item(0);
+			//依次取一级标签
+			Node param = paramList.item(n);
+			//取一级标签下的子标签，放入列表
 			NodeList childParamList = param.getChildNodes();
+			//循环取出子标签的value值放入列表
 			for(int i = 0; i < childParamList.getLength(); i++) {
 				if(childParamList.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					String paramValue = childParamList.item(i).getFirstChild().getNodeValue();
 					paramValueList.add(paramValue);
 				}
+				
 			}
 			
 		} catch (ParserConfigurationException e) {
@@ -91,5 +97,6 @@ public class xmlData {
 		}
 		return paramValueList;
 	}
+	
 	
 }
