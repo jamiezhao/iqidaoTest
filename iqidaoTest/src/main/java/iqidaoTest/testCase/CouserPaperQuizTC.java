@@ -25,15 +25,14 @@ public class CouserPaperQuizTC {
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	// 查询试卷
-	String CourseName = xmlData.getParamFromXml("itemName");
-	String exameName = xmlData.getParamFromXml("exameName");
-	String papername =CourseName+"练习题";
+	String itemName = xmlData.getParamFromXml("itemName");
+	String[] activityName = xmlData.getParamArrayFromXml("activityName");
+	String papername =itemName+"练习题";
 	// 0-系统试卷；1专项考试；2-专项预习；3-专项课后；4-错题本；5推荐试卷
 	String orginselect = xmlData.getParamFromXml("orginselect");
-	String papername1 =CourseName+"预习题";
+	String papername1 =itemName+"预习题";
 	// 0-系统试卷；1专项考试；2-专项预习；3-专项课后；4-错题本；5推荐试卷
 	String orginselect1 = xmlData.getParamFromXml("orginselect1");
-	String papername2 = exameName;
 	// 0-系统试卷；1专项考试；2-专项预习；3-专项课后；4-错题本；5推荐试卷
 	String orginselect2 = xmlData.getParamFromXml("orginselect2");
 	String newnamequiz = xmlData.getParamFromXml("newnamequiz");
@@ -54,7 +53,7 @@ public class CouserPaperQuizTC {
 	public void ExercisesAfter() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
-		paperserach.Search(papername, orginselect);
+		paperserach.Search(papername, orginselect,activityName[0]);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -92,7 +91,7 @@ public class CouserPaperQuizTC {
 	public void PreparePaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
-		paperserach.Search(papername1, orginselect1);
+		paperserach.Search(papername1, orginselect1,activityName[0]);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -126,7 +125,7 @@ public class CouserPaperQuizTC {
 	public void TeatPaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
-		paperserach.Search(papername2, orginselect2);
+		paperserach.Search(itemName, orginselect2,activityName[2]);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -134,7 +133,7 @@ public class CouserPaperQuizTC {
 			e.printStackTrace();
 		}
 		// 进入试卷详细界面
-		paperserach.getPaperSearchList(papername2);
+		paperserach.getPaperSearchList(itemName);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

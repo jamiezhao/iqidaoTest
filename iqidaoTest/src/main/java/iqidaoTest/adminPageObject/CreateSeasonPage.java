@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class CreateSeasonPage extends BasePage{
+	private int activitiesTableRows = 20;
 	public CreateSeasonPage(WebDriver driver, String url) {
 		super(driver);
 		this.url = url;
@@ -17,7 +18,7 @@ public class CreateSeasonPage extends BasePage{
 	By activitySubmitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section[1]/form/footer/button");
 	By descriptionLocator = By.xpath("html/body/div[1]/div/section[2]/section[1]/form/div/div[5]/div/div/div[2]/div");
 	
-	By addSeasonButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section[2]/header/a");
+	By addSeasonButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section[3]/header/a");
 	By seasonNameLocator = By.xpath(".//*[@id='add-match']/div[2]/div[1]/input");
 	By seasonPriceLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[2]/input");
 	By seasonStartTimeLocator = By.xpath(".//*[@id=\"add-match\"]/div[2]/div[3]/input");
@@ -30,11 +31,11 @@ public class CreateSeasonPage extends BasePage{
 	By itemTypeLocator = By.id("type");
 	By courseSyllabusLocator = By.id("upload_doc");
 	By itemSubmitButtonLocator = By.xpath(".//*[@id=\"add-course\"]/div[3]/button[2]");
-	
+	By enabletestButton=By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[6]/div/label/span");
+	By saveButton=By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/footer/button");
 	public WebElement getAddSeasonButton() {
 		return this.dr.findElement(addSeasonButtonLocator);
 	}
-	
 	public WebElement getSeasonNameTextField() {
 		return this.dr.findElement(seasonNameLocator);
 	}
@@ -78,7 +79,12 @@ public class CreateSeasonPage extends BasePage{
 	public WebElement getItemSubmitButton() {
 		return this.dr.findElement(itemSubmitButtonLocator);
 	}
-	
+	public WebElement getenabletestButton() {
+		return this.dr.findElement(enabletestButton);
+	}	
+	public WebElement getsaveButton() {
+		return this.dr.findElement(saveButton);
+	}
 	public boolean findItemByName(String itemName) {
 		boolean flag = false;
 		WebElement table = this.dr.findElement(By.id("special-list"));
@@ -111,7 +117,7 @@ public class CreateSeasonPage extends BasePage{
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(activitySubmitButtonLocator));
 	    js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 700");
 	    try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -123,13 +129,13 @@ public class CreateSeasonPage extends BasePage{
 		this.getSeasonEndTimeTextField().clear();
 		this.getSeasonEndTimeTextField().sendKeys(seasonEndTime);
 		try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		this.getSeasonSubmitButton().click();
 		try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -137,6 +143,16 @@ public class CreateSeasonPage extends BasePage{
 	}
 	
 	
+	public WebElement getActivityByName(String activityName) {
+		WebElement actualActivityName = null; 
+		for(int row = 1; row < activitiesTableRows + 1; row++) {
+			actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
+			if(actualActivityName.getText().contains(activityName)) {
+				return actualActivityName;
+			}
+		}
+		return actualActivityName;
+	}
 	public CreateSeasonPage addCourseItem(String itemName, String itemStartTime, String courseSyllabus) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
@@ -150,42 +166,59 @@ public class CreateSeasonPage extends BasePage{
 	    select.selectByValue("0");
 	    this.getcourseSyllabusTextField().sendKeys(courseSyllabus);
 	    try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	    this.getItemSubmitButton().click();
 	    try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	    return new CreateSeasonPage(this.dr, this.url);
 	}
 	
-	public CreateSeasonPage addExamItem(String itemName, String itemStartTime) {
+	public CreateSeasonPage addExamItem(String itemName, String itemStartTime,String redirectPageUrl) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
 //	    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
 		js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
+	    this.getAddItemButton().click();
 	    this.getItemNameTextField().sendKeys(itemName);
 	    this.getItemStartTimeTextField().clear();
 	    this.getItemStartTimeTextField().sendKeys(itemStartTime);
 		Select select = new Select(this.getItemTypeSelect());
 	    select.selectByValue("1");
 	    try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	    this.getItemSubmitButton().click();
 	    try {
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	    return new CreateSeasonPage(this.dr, this.url);
+		return new CreateSeasonPage(this.dr, redirectPageUrl);
 	}
-	
+	//入学测活动关闭入学测按钮
+	public CreateSeasonPage Enableteseclose( ) {
+		this.getenabletestButton().click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.getsaveButton().click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new CreateSeasonPage(this.dr, this.url);
+
+	}
 	
 }

@@ -60,7 +60,7 @@ public class CreateActivityPage extends BasePage {
 		return activityVersionSelect;
 	}
 
-	// 101为特战队，2为年级训练，3年级训练，4短期班，5公开课
+	// 101为特战队，2为年级训练，3短期班，4讲座课，5公开课，6分班测评
 	public Select getActivityTypeSelect() {
 		Select activityTypeSelect = new Select(this.dr.findElement(activityTypeLocator));
 		return activityTypeSelect;
@@ -149,13 +149,13 @@ public class CreateActivityPage extends BasePage {
 	}
 	public ActivitysListPage createActivity(String activityName, String teacherName, String activityPicture,
 			String signupCount, String lowduan, String price, String signupStartTime, String signupEndTime,
-			String activityStartTime, String activityEndTime, String redirectPageUrl) {
+			String activityStartTime, String activityEndTime, String redirectPageUrl,String type) {
 		this.getActivityNameTextField().sendKeys(activityName);
 		this.getActivityUserLimitTextField().sendKeys("10");
 		Select activityVersion = this.getActivityVersionSelect();
 		activityVersion.selectByValue("2"); // 2为双师模式
 		Select activityType = this.getActivityTypeSelect();
-		activityType.selectByValue("2"); // 2为年级训练
+		activityType.selectByValue(type); // 2为年级训练
 		this.setActivityTeacher(teacherName);
 		this.getActivityPictureField().sendKeys(activityPicture);
 		this.getDescriptionTextField().sendKeys("this is activity's description");

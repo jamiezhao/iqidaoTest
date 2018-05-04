@@ -1,23 +1,16 @@
 package iqidaoTest.testCase;
 
-import java.awt.Desktop.Action;
-
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.AssertJUnit;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import iqidaoTest.CoursePaper.SwitchTo;
 import iqidaoTest.SignupCombo.CreateComboPage;
 import iqidaoTest.Utils.xmlData;
-import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
-import iqidaoTest.adminPageObject.CreateActivityPage;
 public class SignupComboTC {
 	private WebDriver driver;
 	//页面URL
@@ -77,14 +70,10 @@ public class SignupComboTC {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			createComboPage.EditCombo(notemodmod, Combonamemod, nowpricemod, activityName,seasonName, CmoboListUrl);
-			//检查是否修改成功
-			/*Actions action = new Actions(driver) ;
-			action.sendKeys(Keys.CONTROL+"w").perform();
-			createComboPage.ElementExist(Combonamemod);*/	
+			createComboPage.EditCombo(notemodmod, Combonamemod, nowpricemod, activityName,seasonName);
 		}
-		@AfterTest
+		/*@AfterTest
 		public void afterTest() {
 			this.driver.quit();
-		}
+		}*/
 }

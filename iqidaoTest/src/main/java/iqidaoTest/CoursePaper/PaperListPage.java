@@ -1,6 +1,7 @@
 package iqidaoTest.CoursePaper;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -18,6 +19,8 @@ public class PaperListPage extends BasePage {
 	// 查询界面元素定位
 	By NameSearchLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[1]/div/input");
 	By OriginSearchLoactor = By.name("paperSrcId");
+	By activitySearchLoactor=By.xpath("//*[@id='select2-activityId-container']");
+	By activityInputLoactor=By.xpath("/html/body/span/span/span[1]/input");
 	By SearchButtonLoactor = By.xpath("/html/body/div/div/section[2]/div/form/div/div[6]/div/div/input");
 	By QuizDelLoactor = By.xpath("//*[@id='paperQuiz']/tbody/tr[1]/td[15]/a");
 	By ConfirmButtonLoactor = By.id("delete-confirm");
@@ -30,6 +33,12 @@ public class PaperListPage extends BasePage {
 		Select OriginSearch = new Select(this.dr.findElement(OriginSearchLoactor));
 		return OriginSearch;
 	}
+	public WebElement getactivitySearchLoactor() {
+		return this.dr.findElement(activitySearchLoactor);
+	}
+	public WebElement getactivityInputLoactor() {
+		return this.dr.findElement(activityInputLoactor);
+	}
 	public WebElement getSearchButtonLoactor() {
 		return this.dr.findElement(SearchButtonLoactor);
 		}
@@ -40,8 +49,17 @@ public class PaperListPage extends BasePage {
 		return this.dr.findElement(ConfirmButtonLoactor);
 		}
 	//查询方法
-	public  WebDriver Search(String papername,String orginselect) {
+	public  WebDriver Search(String papername,String orginselect,String activityName) {
 		this.getNameSearchLoactor().sendKeys(papername);
+		this.getactivitySearchLoactor().click();
+		this.getactivityInputLoactor().sendKeys(activityName);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.getactivityInputLoactor().sendKeys(Keys.ENTER);
 		Select OriginSearch=this.getOriginSearchLoactor();
 		//0-系统试卷；1专项考试；2-专项预习；3-专项课后；4-错题本；5推荐试卷
 		OriginSearch.selectByValue(orginselect);

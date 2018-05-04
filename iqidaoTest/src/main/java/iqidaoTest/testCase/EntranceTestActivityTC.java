@@ -3,16 +3,15 @@ package iqidaoTest.testCase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.AssertJUnit;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import iqidaoTest.Utils.xmlData;
-import iqidaoTest.adminPageObject.ActivityComboPage;
+import iqidaoTest.adminPageObject.ActivityTestExam;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
 
-public class ActivityComboTC {
+public class EntranceTestActivityTC {
 
 	private WebDriver driver;
 	// 页面URL
@@ -24,11 +23,11 @@ public class ActivityComboTC {
 	String ChormeURL = xmlData.getParamFromXml("ChormeURL");
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
-	// 创建续报关联
-	String Combonamemod = xmlData.getParamFromXml("Combonamemod");
-	String combostartime = xmlData.getParamFromXml("combostartime");
-	String comboendtime = xmlData.getParamFromXml("comboendtime");
-	String activityName = xmlData.getParamFromXml("activityName");
+	// 创建入学测配置
+	String testpassscore = xmlData.getParamFromXml("testpassscore");
+	String viewscoretime = xmlData.getParamFromXml("viewscoretime");
+	String dividetime = xmlData.getParamFromXml("dividetime");
+	String[] activityName = xmlData.getParamArrayFromXml("activityName");
 
 	@BeforeTest
 	public void beforeTest() {
@@ -47,15 +46,16 @@ public class ActivityComboTC {
 		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
 
-	// 创建活动-续报关联
-	@Test(dependsOnMethods = { "adminLogin" }, groups = { "CreateComboLink" })
-	public void ComboLink() {
-		ActivityComboPage activityComboPage = new ActivityComboPage(this.driver, activitysListUrl);
-		activityComboPage.SearchActivity(activityName);
-		activityComboPage.CreatActivityCombo(Combonamemod, combostartime, comboendtime);
-	}
-	@AfterTest
-	public void afterTest() {
-		this.driver.quit();
+	// 创建入学测配置
+	@Test(dependsOnMethods = { "adminLogin" }, groups = { "Creaentrancetetest" })
+	public void CreateEntranceTest() {
+		ActivityTestExam activityTestExam = new ActivityTestExam(this.driver, activitysListUrl);
+		activityTestExam.SearchActivity(activityName[0]);
+		activityTestExam.AddTest(activityName[0], testpassscore, viewscoretime, dividetime);
+		// 删除入学测配置
+		activityTestExam.DelTest();
+		//重新添加
+		activityTestExam.AddTest(activityName[2], testpassscore, viewscoretime, dividetime);
+
 	}
 }

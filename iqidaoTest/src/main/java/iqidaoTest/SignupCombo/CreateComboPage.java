@@ -162,7 +162,6 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 			e.printStackTrace();
 		}
 		WebElement comboname1 = this.dr.findElement(By.xpath("/html/body/div/div/section[2]/div/div[3]/div/table/tbody/tr[1]/td[3]/a"));
-		System.out.println("找到了"+comboname1.getText());
 		if(comboname1.getText().contains(Comboname))
 		{
 			comboname1.click();
@@ -181,9 +180,9 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 		return this.dr;
 		
 	}
-	public CreateComboPage EditCombo(String notemod,String Combonamemod,String nowpricemod,String activityName,String seasonName,String CmoboListUrl){
+	public String EditCombo(String notemod,String Combonamemod,String nowpricemod,String activityName,String seasonName){
 		
-		/*//修改基本信息
+		//修改基本信息
 		this.getComboNameEditInput().clear();
 		this.getComboNameEditInput().sendKeys(Combonamemod);
 		this.getNoteInput().clear();
@@ -196,7 +195,7 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 		//添加活动
 		this.getActivity().click();
 		this.getActivityInput().sendKeys(activityName);
@@ -206,7 +205,6 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 			e.printStackTrace();
 		}
 		this.getActivityInput().sendKeys(Keys.ENTER);
-		//this.getActivitySelect().click();
 		this.getSeason().click();
 		this.getSeasonInput().sendKeys(seasonName);
 		try {
@@ -217,6 +215,6 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 		}
 		this.getSeasonInput().sendKeys(Keys.ENTER);
 		this.getSaveactivityButton().click();
-		return new CreateComboPage(driver,CmoboListUrl);
+		return this.url;
 	}
 }

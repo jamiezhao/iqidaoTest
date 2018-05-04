@@ -27,7 +27,7 @@ public class ActivityTC {
 	String userName = xmlData.getParamFromXml("userName");
 	String passWord = xmlData.getParamFromXml("passWord");
 	//创建活动
-	String activityName = xmlData.getParamFromXml("activityName");
+	String[] activityName = xmlData.getParamArrayFromXml("activityName");
 	String teacherName = xmlData.getParamFromXml("teacherName");
 	String activityPicture = xmlData.getParamFromXml("activityPicture");
 	String signupCount = xmlData.getParamFromXml("signupCount");
@@ -37,6 +37,7 @@ public class ActivityTC {
 	String signupEndTime = xmlData.getParamFromXml("signupEndTime");
 	String activityStartTime = xmlData.getParamFromXml("activityStartTime");
 	String activityEndTime = xmlData.getParamFromXml("activityEndTime");
+	String[] activitytype = xmlData.getParamArrayFromXml("activitytype");	
 	//创建赛季
 	String seasonName = xmlData.getParamFromXml("seasonName");
 	String seasonPrice = xmlData.getParamFromXml("seasonPrice");
@@ -57,7 +58,7 @@ public class ActivityTC {
 	}
 	
 	//后台登录
-	@Test(groups = { "CreateActivity" })
+	@Test(groups = { "adminLogin" })
 //	@Test
 	public void adminLogin(){
 		String expectedResult = "首页";
@@ -68,40 +69,57 @@ public class ActivityTC {
 	}
 	
 	//创建活动
-	@Test(dependsOnMethods = {"adminLogin"},groups = { "CreateActivity" })
-//	@Test(dependsOnMethods = {"adminLogin"})
+	//@Test(dependsOnMethods = {"adminLogin"},groups = { "CreateActivity" })
 	public void createActivity(){
-		String expectedResult = activityName;
+		for(int i=0;i<3;i++){
+		String expectedResult = activityName[i];
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName[i], teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl,activitytype[i]);
 		String actualResult = activitysListPage.getFirstActivityName().getText();
 		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
 	}
+	}
 	
 	//创建赛季和课程
-	@Test(dependsOnMethods = {"createActivity"},groups = { "CreateActivity" })
-//	@Test(dependsOnMethods = {"createActivity"})
+	@Test(dependsOnMethods = {"createActivity"},groups = { "CreateSeason" })
 	public void createSeasonAndCourse() throws InterruptedException {
 		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
-		WebElement activityDetail = activityListPage.getActivityByName(activityName);
+		WebElement activityDetail = activityListPage.getActivityByName(activityName[0]);
 		if(activityDetail != null) {
 			activityDetail.click();
 			this.driver.navigate().refresh();
 			String currentUrl = this.driver.getCurrentUrl();
 			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
 			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 			createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 		}else {
 			AssertJUnit.assertTrue(false);
-		}
-		
+		}	
 	}
-	
-	
-	/*@AfterTest
+	//入学测只需添加试卷条目
+	@Test(dependsOnMethods = {"CreateSeason"},groups = { "CreateSeason1" })
+	public void createSeasonAndCoursetest() throws InterruptedException {
+		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
+		WebElement activityDetail = activityListPage.getActivityByName(activityName[2]);
+		if(activityDetail != null) {
+			activityDetail.click();
+			Thread.sleep(2000);
+			String currentUrl = this.driver.getCurrentUrl();
+			CreateSeasonPage createSeasonPage = new CreateSeasonPage(this.driver, currentUrl);
+			createSeasonPage=createSeasonPage.Enableteseclose();
+			Thread.sleep(2000);
+			createSeasonPage = createSeasonPage.addActivitySeason(seasonName, seasonPrice, seasonStartTime, seasonEndTime);
+			Thread.sleep(2000);
+			createSeasonPage = createSeasonPage.addExamItem(itemName, itemStartTime,activitysListUrl);
+			Thread.sleep(2000);
+		}else {
+			AssertJUnit.assertTrue(false);
+		}		
+	}
+	@AfterTest
 	public void afterTest() {
 		this.driver.close();
-	}*/
+	}
 }

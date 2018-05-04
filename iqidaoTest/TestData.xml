@@ -23,10 +23,15 @@
 		 <ChormeURL name="谷歌驱动路径">C:\\231\\chromedriver.exe</ChormeURL> 
 	</login>
 	<activity>
-		<activityName name="活动名称">zlautotest</activityName>
+		<activityName name="活动名称">zlautotest源活动</activityName>
+		<activityName name="活动名称">zlautotest续报活动</activityName>
+		<activityName name="活动名称">zlautotest入学测</activityName>		
+		<activitytype name="活动类型">2</activitytype>	
+		<activitytype name="活动类型">6</activitytype>		
+		<activitytype name="活动类型">2</activitytype>		
 		<teacherName name="主讲老师姓名">zl老师00</teacherName>
-		<!--<activityPicture name="活动图片">C:\\工作目录\\测试图片.png</activityPicture> -->
-     	<activityPicture name="活动图片">C:\\Users\\zhangjy\\Pictures\\aa.jpg</activityPicture>
+     	<activityPicture name="活动图片">C:\\Users\\zhangjy\\Desktop\\aa.jpg</activityPicture>
+     	<!--  <activityPicture name="活动图片">C:\\Users\\zhangjy\\Pictures\\aa.jpg</activityPicture>-->
 		<signupCount name="用户报名人数">0</signupCount>
 		<lowduan name="最低段位">-4</lowduan>
 		<price name="活动价格">1</price>
@@ -38,8 +43,9 @@
 		<seasonPrice name="赛季价格">1</seasonPrice>
 		<itemName name="课程名称">第一课</itemName>
 		<itemStartTime name="课程开始时间">2018-03-16 19:30</itemStartTime>
-		<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>
--		<activityUserName name="活动用户">zl棋手80</activityUserName>
+		<courseSyllabus name="课程大纲">C:\\Users\\zhangjy\\Desktop\\K级官子第1课时——研发完成.doc</courseSyllabus>
+<!-- 	<courseSyllabus name="课程大纲">C:\\工作目录\\K级官子第1课时——研发完成.doc</courseSyllabus>-->
+		<activityUserName name="活动用户">zl棋手80</activityUserName>
 -		<activityUserName name="活动用户">zl棋手81</activityUserName>
 -		<activityUserName name="活动用户">zl棋手82</activityUserName>
 	</activity>
