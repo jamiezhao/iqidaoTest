@@ -55,6 +55,12 @@ public class ActivityComboPage extends BasePage {
 
 	// 查找源活动进入续报条目添加界面
 	public void SearchActivity(String activityName) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.dr.findElement(By.xpath("//*[@id='activity-query']/div[1]/div/input")).sendKeys(activityName);
 		this.dr.findElement(By.xpath("//*[@id='activity-query']/div[6]/div/div/input")).click();
 		try {

@@ -18,8 +18,17 @@ public class ActivitysListPage extends BasePage{
 	By activityListMenuLocator = By.xpath("html/body/div[1]/aside/section/ul/li[1]/ul/li/a/span");
 	
 	By createActivityLocator = By.linkText("创建活动");
+	//查找活动
+	By activitySearchLocator = By.xpath("//*[@id='activity-query']/div[1]/div/input");
+	By activitySearchButton = By.xpath("//*[@id='activity-query']/div[6]/div/div/input");	
 	public WebElement getFirstActivityName(){
 		return this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[1]/td[4]/a"));
+	}
+	public WebElement getactivitySearchLocator(){
+		return this.dr.findElement(activitySearchLocator);
+	}
+	public WebElement getactivitySearchButton(){
+		return this.dr.findElement(activitySearchButton);
 	}
 	public String getActivityUrlByName(String activityName) {
 		boolean flag = false; 
@@ -40,18 +49,30 @@ public class ActivitysListPage extends BasePage{
 		
 	}
 	
-	public WebElement getActivityByName(String activityName) {
-		WebElement actualActivityName = null; 
-		for(int row = 1; row < activitiesTableRows + 1; row++) {
-			actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
-			if(actualActivityName.getText().contains(activityName)) {
-				return actualActivityName;
-			}
+	public void getActivityByName(String activityName) {
+		this.getactivitySearchLocator().sendKeys(activityName);
+		this.getactivitySearchButton().click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return actualActivityName;
+		this.dr.findElement(By.xpath("//*[@id='activity-list']/tbody/tr[1]/td[4]/a/span")).click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public WebElement getActivityUsersByName(String activityName) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		WebElement activityUsers = null; 
 		for(int row = 1; row < activitiesTableRows + 1; row++) {
 			WebElement actualActivityName = this.dr.findElement(By.xpath(".//*[@id='activity-list']/tbody/tr[" + row + "]/td[4]"));
@@ -63,4 +84,6 @@ public class ActivitysListPage extends BasePage{
 		}
 		return activityUsers;
 	}
+	//查找活动
+	
 }

@@ -85,7 +85,7 @@ public class ActivityUsersPage extends BasePage{
 			String actualUserNameStr = actualUserName.getText();
 			if(actualUserNameStr.equals(activityUserName)) {
 				flag = true;
-				WebElement deleteButton = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[10]"));
+				WebElement deleteButton = this.dr.findElement(By.xpath("html/body/div[1]/div/section[2]/section/div/div[1]/div[1]/table/tbody/tr[" + row + "]/td[8]"));
 				deleteButton.click();
 				try {
 					Thread.sleep(3000);

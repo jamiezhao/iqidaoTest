@@ -27,8 +27,8 @@
 		<activityName name="活动名称">zlautotest续报活动</activityName>
 		<activityName name="活动名称">zlautotest入学测</activityName>		
 		<activitytype name="活动类型">2</activitytype>	
-		<activitytype name="活动类型">6</activitytype>		
 		<activitytype name="活动类型">2</activitytype>		
+		<activitytype name="活动类型">6</activitytype>		
 		<teacherName name="主讲老师姓名">zl老师00</teacherName>
      	<activityPicture name="活动图片">C:\\Users\\zhangjy\\Desktop\\aa.jpg</activityPicture>
      	<!--  <activityPicture name="活动图片">C:\\Users\\zhangjy\\Pictures\\aa.jpg</activityPicture>-->

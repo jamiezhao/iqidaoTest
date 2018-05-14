@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import iqidaoTest.CoursePaper.CourseQuizAddPage;
 import iqidaoTest.CoursePaper.PaperListPage;
 import iqidaoTest.CoursePaper.SwitchTo;
+import iqidaoTest.Utils.MyChormeDriver;
+import iqidaoTest.Utils.TestProperties;
 import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
@@ -39,17 +41,22 @@ public class CouserPaperQuizTC {
 	@BeforeTest
 	public void BeforeTest() {
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
+		//多个案例连续跑，只打开1个浏览器时用这个
+		TestProperties prop =new TestProperties();
+		String  driverserver = prop.GetValueByKey("Test.Properties", "Driver");
+		String  caseSession = prop.GetValueByKey("Test.Properties", "Sessionid");
+		this.driver = new MyChormeDriver(driverserver,caseSession);
+		/*//单个测试案例执行时使用
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		String actualResult = adminHomePage.getTitleText();
-		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));*/
 	}
-
 	// 添加试卷-课后题
-	@Test(groups = { "AcitivityPaperQuiz" })
+	@Test(groups = { "AcitivityPaperQuiz" },priority = 1)
 	public void ExercisesAfter() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -87,7 +94,7 @@ public class CouserPaperQuizTC {
 		del.Delquiz();
 	}
 
-	@Test(groups = { "AcitivityPaperQuiz" })
+	@Test(groups = { "AcitivityPaperQuiz" },priority = 0)
 	public void PreparePaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -121,7 +128,7 @@ public class CouserPaperQuizTC {
 		paperserach.ElementExist();
 	}
 
-	@Test(groups = { "AcitivityPaperQuiz" })
+	@Test(groups = { "AcitivityPaperQuiz" },priority = 2)
 	public void TeatPaper() {
 		// 查询试卷
 		PaperListPage paperserach = new PaperListPage(this.driver, paperSearchUrl);
@@ -155,8 +162,8 @@ public class CouserPaperQuizTC {
 		paperserach.ElementExist();
 	}
 
-	@AfterTest
+	/*@AfterTest
 	public void afterTest() {
 		this.driver.quit();
-	}
+	}*/
 }

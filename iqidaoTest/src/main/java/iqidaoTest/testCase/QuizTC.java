@@ -10,7 +10,9 @@ import org.testng.annotations.Test;
 import iqidaoTest.QuizObject.QuizClassListPage;
 import iqidaoTest.QuizObject.QuizClassficationPage;
 import iqidaoTest.QuizObject.QuizListPage;
+import iqidaoTest.Utils.MyChormeDriver;
 import iqidaoTest.Utils.SetLog;
+import iqidaoTest.Utils.TestProperties;
 import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
@@ -46,8 +48,6 @@ public class QuizTC {
 
 	@BeforeTest
 	public void BeforeSuite() {
-		SetLog setlog=new SetLog();
-		setlog.SetLogInfo();
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();

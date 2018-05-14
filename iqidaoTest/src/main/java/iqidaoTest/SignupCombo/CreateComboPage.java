@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import iqidaoTest.adminPageObject.BasePage;
 
 public class CreateComboPage extends BasePage{
-private WebDriver driver;
 private static Log log = LogFactory.getLog(CreateComboPage.class); 
 
 	public CreateComboPage(WebDriver driver, String url) {
@@ -154,7 +153,7 @@ private static Log log = LogFactory.getLog(CreateComboPage.class);
 		}
 		return this.dr;
 	}
-	public WebDriver FindCombo(String Comboname){
+	public WebDriver FindCombo(String Comboname) throws Exception{
 		SearchCombo(Comboname);
 		try {
 			Thread.sleep(3000);

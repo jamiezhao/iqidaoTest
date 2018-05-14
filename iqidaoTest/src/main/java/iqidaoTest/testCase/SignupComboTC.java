@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import iqidaoTest.CoursePaper.SwitchTo;
 import iqidaoTest.SignupCombo.CreateComboPage;
+import iqidaoTest.Utils.MyChormeDriver;
+import iqidaoTest.Utils.TestProperties;
 import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
@@ -37,29 +39,30 @@ public class SignupComboTC {
 		@BeforeTest
 		public void beforeTest() {
 			System.setProperty("webdriver.chrome.driver", ChormeURL);
+			//多个案例连续跑，只打开1个浏览器时用这个
+			TestProperties prop =new TestProperties();
+			String  driverserver = prop.GetValueByKey("Test.Properties", "Driver");
+			String  caseSession = prop.GetValueByKey("Test.Properties", "Sessionid");
+			this.driver = new MyChormeDriver(driverserver,caseSession);
+			/*//单个测试案例执行时使用
 			this.driver = new ChromeDriver();
-			this.driver.manage().window().maximize();
-		}
-		
-		//后台登录
-		@Test(groups = { "adminLogin" })
-		public void adminLogin(){
 			String expectedResult = "首页";
 			AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 			AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 			String actualResult = adminHomePage.getTitleText();
-			AssertJUnit.assertTrue(actualResult.contains(expectedResult));
+			AssertJUnit.assertTrue(actualResult.contains(expectedResult));*/
+			this.driver.manage().window().maximize();
 		}
 		//创建续报
-		@Test(dependsOnMethods = {"adminLogin"},groups = { "CreateCombo" })
+		@Test(groups = { "EditCombo" },priority = 0)
 		public void CreateCombo(){
 			CreateComboPage createComboPage = new CreateComboPage(this.driver, CmoboListUrl);
 			createComboPage.CreatCmobo(Comboname, Originalprice, Nowprice, Registnum, fileurl,note);
 			createComboPage.ElementExist(Comboname);
 		}
 		//编辑续报信息以及添加活动
-		@Test(dependsOnMethods = {"CreateCombo"},groups = { "EditCombo" })
-		public void EditCombo(){
+		@Test(groups = { "EditCombo" },priority = 1)
+		public void EditCombo() throws Exception{
 			CreateComboPage createComboPage = new CreateComboPage(this.driver, CmoboListUrl);
 			createComboPage.FindCombo(Comboname);
 			SwitchTo switch1 = new SwitchTo();
