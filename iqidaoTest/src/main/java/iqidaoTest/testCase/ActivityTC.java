@@ -73,7 +73,7 @@ public class ActivityTC {
 	// 创建活动
 	@Test(priority = 0)
 	public void createActivity() {
-		for (int i = 2; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			String expectedResult = activityName[i];
 			CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
 			ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName[i], teacherName,

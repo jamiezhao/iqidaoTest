@@ -39,14 +39,14 @@ public class EntranceTestActivityTC {
 		String  driverserver = prop.GetValueByKey("Test.Properties", "Driver");
 		String  caseSession = prop.GetValueByKey("Test.Properties", "Sessionid");
 		this.driver = new MyChormeDriver(driverserver,caseSession);
-		/*//单个测试案例执行时使用
+	/*	//单个测试案例执行时使用
 		this.driver = new ChromeDriver();
 		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		String actualResult = adminHomePage.getTitleText();
-		AssertJUnit.assertTrue(actualResult.contains(expectedResult));*/
-		this.driver.manage().window().maximize();
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
+		this.driver.manage().window().maximize();*/
 	}
 
 	// 创建入学测配置
@@ -54,7 +54,7 @@ public class EntranceTestActivityTC {
 	public void CreateEntranceTest() {
 		ActivityTestExam activityTestExam = new ActivityTestExam(this.driver, activitysListUrl);
 		activityTestExam.SearchActivity(activityName[0]);
-		activityTestExam.AddTest(activityName[0], testpassscore, viewscoretime, dividetime);
+		activityTestExam.AddTest(activityName[2], testpassscore, viewscoretime, dividetime);
 		// 删除入学测配置
 		activityTestExam.DelTest();
 		//重新添加
