@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import iqidaoTest.Utils.CommonUtils;
+import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
@@ -38,6 +39,7 @@ public class TestLogin {
 	String userName = "13811460080";
 	String passWord = "111111";
 	String activityPicture = "C:\\\\工作目录\\\\测试图片.png";
+	String activitytype = xmlData.getParamFromXml("activitytype");	
 	//发放用户优惠券
 	String couponUserName = "zl棋手80";
 	String couponPrice = "1";
@@ -226,7 +228,7 @@ public class TestLogin {
 		String expectedResult = activityName;
 		
 		CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, url);
-		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl);
+		ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName, teacherName, activityPicture, signupCount, lowduan, price, signupStartTime, signupEndTime, activityStartTime, activityEndTime, activitysListUrl,activitytype);
 		String actualResult = activitysListPage.getFirstActivityName().getText();
 		System.out.println(actualResult);
 		

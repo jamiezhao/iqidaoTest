@@ -8,6 +8,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import iqidaoTest.Utils.MyChormeDriver;
+import iqidaoTest.Utils.TestProperties;
 import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.ActivityUsersPage;
 import iqidaoTest.adminPageObject.ActivitysListPage;
@@ -33,25 +35,25 @@ public class ActivityUserTC {
 	
 	@BeforeTest
 	public void beforeTest() {
-//		this.driver = new FirefoxDriver();
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
+		//多个案例连续跑，只打开1个浏览器时用这个
+		TestProperties prop =new TestProperties();
+		String  driverserver = prop.GetValueByKey("Test.Properties", "Driver");
+		String  caseSession = prop.GetValueByKey("Test.Properties", "Sessionid");
+		this.driver = new MyChormeDriver(driverserver,caseSession);
+		/*//单个测试案例执行时使用
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
-	}
-	
-	//后台登录
-	@Test(groups = { "AcitivityAddUser" })
-	public void adminLogin(){
 		String expectedResult = "首页";
 		AdminLoginPage adminLoginPage = new AdminLoginPage(this.driver, adminLoginUrl);
 		AdminHomePage adminHomePage = adminLoginPage.adminLogin(userName, passWord, adminHomeUrl);
 		String actualResult = adminHomePage.getTitleText();
-		AssertJUnit.assertTrue(actualResult.contains(expectedResult));
+		AssertJUnit.assertTrue(actualResult.contains(expectedResult));*/
 	}
 	
+	
 	//手工添加活动用户
-	//@Test(dependsOnMethods = {"createSeasonAndCourse"})
-	@Test(dependsOnMethods = {"adminLogin"})
+	@Test(groups = { "AcitivityAddUser" },priority = 0)
 	public void addActivityUser() {
 		ActivitysListPage activitysListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		WebElement activityUsers = activitysListPage.getActivityUsersByName(activityName);
@@ -77,7 +79,7 @@ public class ActivityUserTC {
 	}
 	
 	//手动删除活动用户
-	@Test(dependsOnMethods = {"addActivityUser"})
+	@Test(groups = { "AcitivityAddUser" },priority = 1)
 	public void deleteActivityUser() {
 		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		WebElement activityUsers = activityListPage.getActivityUsersByName(activityName);
@@ -94,10 +96,9 @@ public class ActivityUserTC {
 		}
 		
 	}
-	
-	@AfterTest
+	/*@AfterTest
 	public void afterTest() {
 		this.driver.close();
-	}
+	}*/
 
 }
