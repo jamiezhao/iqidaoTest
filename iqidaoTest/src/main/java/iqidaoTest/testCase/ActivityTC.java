@@ -51,6 +51,11 @@ public class ActivityTC {
 	String itemName = xmlData.getParamFromXml("itemName");
 	String itemStartTime = xmlData.getParamFromXml("itemStartTime");
 	String courseSyllabus = xmlData.getParamFromXml("courseSyllabus");
+	//创建AI
+	String AItime = xmlData.getParamFromXml("AItime");
+	String gamecount = xmlData.getParamFromXml("gamecount");
+	String gamelevel = xmlData.getParamFromXml("gamelevel");
+	String gamerul = xmlData.getParamFromXml("gamerul");
 
 	@BeforeTest
 	public void beforeTest() throws IOException {
@@ -60,7 +65,7 @@ public class ActivityTC {
 		String  driverserver = prop.GetValueByKey("Test.Properties", "Driver");
 		String  caseSession = prop.GetValueByKey("Test.Properties", "Sessionid");
 		this.driver = new MyChormeDriver(driverserver,caseSession);
-		/*// 单个测试案例执行时使用
+	/*	// 单个测试案例执行时使用
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
 		String expectedResult = "首页";
@@ -71,7 +76,7 @@ public class ActivityTC {
 	}
 
 	// 创建活动
-	@Test(priority = 0)
+	//@Test(priority = 0)
 	public void createActivity() {
 		for (int i = 0; i < 3; i++) {
 			String expectedResult = activityName[i];
@@ -96,8 +101,9 @@ public class ActivityTC {
 		Thread.sleep(2000);
 		createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
 		Thread.sleep(2000);
-	}
-
+		createSeasonPage = createSeasonPage.addAIItem(itemName, itemStartTime, activitysListUrl, AItime, gamecount, gamelevel, gamerul);
+		Thread.sleep(2000);
+	}		
 	// 入学测只需添加试卷条目
 	@Test(groups = { "CreateSeason" }, priority = 2)
 	public void createSeasonAndCoursetest() throws InterruptedException {

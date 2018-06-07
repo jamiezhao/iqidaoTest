@@ -45,8 +45,8 @@ public class CreateActivityPage extends BasePage {
 			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[5]/div/label/span");
 	By enablesignTestLocator = By
 			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[6]/div/label/span");
+	By enableAuditLocator = By.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[7]/div/label/span");
 	By submitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[2]/button");
-
 	public WebElement getActivityNameTextField() {
 		return this.dr.findElement(activityNameLocator);
 	}
@@ -144,6 +144,9 @@ public class CreateActivityPage extends BasePage {
 	public WebElement getenablesignTestButton() {
 		return this.dr.findElement(enablesignTestLocator);
 	}
+	public WebElement getenableAuditLocator() {
+		return this.dr.findElement(enableAuditLocator);
+	}
 	public WebElement getSubmitButton() {
 		return this.dr.findElement(submitButtonLocator);
 	}
@@ -175,6 +178,7 @@ public class CreateActivityPage extends BasePage {
 		this.getEndTimeTextField().sendKeys(activityEndTime);
 		Select activityquarterSelect = this.getactivityquarterSelect();
 		activityquarterSelect.selectByValue("2"); // 2-暑假班
+		
 		JavascriptExecutor js1 = (JavascriptExecutor) this.dr;
 		js1.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
 		this.getEnableSignupButton().click();
@@ -183,6 +187,7 @@ public class CreateActivityPage extends BasePage {
 		this.getenableSMSButton().click();
 		this.getenablecomboButton().click();
 		this.getenablesignTestButton().click();
+		this.getenableAuditLocator().click();
 		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
 		js2.executeScript("arguments[0].scrollIntoView(true);", this.getSubmitButton());
 		this.getSubmitButton().click();
