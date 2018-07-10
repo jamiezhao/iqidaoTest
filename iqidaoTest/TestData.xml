@@ -52,6 +52,10 @@
 		<activityUserName name="活动用户">zl棋手80</activityUserName>
 -		<activityUserName name="活动用户">zl棋手81</activityUserName>
 -		<activityUserName name="活动用户">zl棋手82</activityUserName>
+-		<ReportName name="报告名称">阶段性报告自定义</ReportName>
+-		<ReportStartTime name="阶段性报告开始时间">2018-07-10 14:50</ReportStartTime>
+-		<ReportEndTime name="阶段性报告结束时间">2018-07-13 14:50</ReportEndTime>
+-		<ReportSendTime name="阶段性报告发送时间">2018-07-13 15:00</ReportSendTime>
 	</activity>
 	<coupon>
 		<couponUserName name="优惠券用户">zl棋手80</couponUserName>
