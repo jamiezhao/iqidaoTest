@@ -115,7 +115,7 @@ public class ActivityTC {
 		noticreate.CreateNotificationPage( ReportName,ReportStartTime, ReportEndTime, ReportSendTime);
 	}		
 	// 入学测只需添加试卷条目
-	//@Test(groups = { "CreateSeason" }, priority = 2)
+	@Test(groups = { "CreateSeason" }, priority = 2)
 	public void createSeasonAndCoursetest() throws InterruptedException {
 		ActivitysListPage activityListPage = new ActivitysListPage(this.driver, activitysListUrl);
 		activityListPage.getActivityByName(activityName[2]);

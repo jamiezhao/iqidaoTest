@@ -41,5 +41,10 @@
 			<class name="iqidaoTest.testCase.EntranceTestActivityTC" />
 			<class name="iqidaoTest.testCase.ExchangeClassTC" />
 		</classes>
+		</test>
+	<test preserve-order="true"  name="FrontWeb">
+	<classes>
+			<class name="iqidaoTest.testCase.FrontPaperAddTC" />
+		</classes>
 	</test>
-</suite> <!-- Default suite -->
+	</suite> <!-- Default suite -->

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <testcases>
 <urls>
-
+	<WebFrontUrl>https://testing.iqidao.com</WebFrontUrl>
+	<CreatePapertUrl>https://testing.iqidao.com/papers_t</CreatePapertUrl>
 	<adminLoginUrl>http://testing.iqidao.com/admin001</adminLoginUrl>
 	<adminHomeUrl>http://testing.iqidao.com/admin001/home</adminHomeUrl>
 	<createActivityUrl>http://testing.iqidao.com/admin001/activity/create</createActivityUrl>
@@ -17,6 +18,7 @@
 </urls>
 <params>
 	<login> 
+		<frontName name="用户名">13011469801</frontName>
 		<userName name="用户名">186186</userName>
 		<passWord name="密码">111111</passWord>
 		<!--<ChormeURL name="谷歌驱动路径">C:\\工作目录\\autoTest\\chromedriver33.exe</ChormeURL> -->
@@ -79,10 +81,10 @@
 		<tixing name="题型">4</tixing>
 		<first1 name="黑显白先">1</first1>
 		<filename name="文件路径">C:\\工作目录\\1K黑先自动应答题-如何破入白空.sgf</filename>
-		<!-- <filename name="文件路径">C:\\官子sgf\\1K黑先自动应答题-如何破入白空.sgf</filename> -->
+		<!-- <filename name="文件路径">C:\\试题\\1K黑先自动应答题-如何破入白空.sgf</filename> -->
 		<result name="试题结果类型">1</result>
 		<quizname name="试题名称">如何破入白空</quizname>
-        <!-- <newfile name="修改试题名称">C:\\官子sgf\\6D黑先自动应答，如何全部收取四个一路扳？（思考对手反击）.sgf</newfile> -->
+        <!-- <newfile name="修改试题名称">C:\\试题\\1K黑先自动应答题-如何破入白空.sgf</newfile> -->
         <newfile name="修改试题名称">C:\\工作目录\\1.0黑先选择，挂角套路的交换.sgf</newfile>
         <newnamequiz name="修改试题名称">试题名称修改</newnamequiz>
 	</quiz>
@@ -115,11 +117,17 @@
 		<combostartime name="活动中续报展示时间">2018-04-27 18:14</combostartime>		
 		<comboendtime name="活动中续报展示时间">2019-04-27 18:14</comboendtime>				
 </cmobo>
+<testactivity>
 		<testpassscore name="入学测通过分数">80</testpassscore>				
 		<viewscoretime name="入学测可查分数时间">2018-04-27 18:14</viewscoretime>				
 		<dividetime name="入学测分班时间">2018-04-27 18:14</dividetime>				
-<testactivity>
 </testactivity>
+<frontpaper>
+		<Papername name="作业试卷名称">18暑I7二期王盛强班1天1卷</Papername>		
+	    <PaperStarttime name="作业试卷开始时间">2018-07-11 14:00</PaperStarttime>
+	    <frontquizurl name="导入试题路径">C:\\试题\\5D黑先选择，，如何选择下一手.sgf</frontquizurl>	
+	     <dayuselect name="试题大域">5</dayuselect>					
+</frontpaper>
 </params>
 </testcases>
 
