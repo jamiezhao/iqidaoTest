@@ -34,19 +34,20 @@ public class CreateActivityPage extends BasePage {
 	By activityEndTimeLocator = By.name("endTime");
 	By activityquarterLocator = By.name("quarter");
 	By enableSignupLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[2]/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[2]/div/label/span");
 	By enableOnlineLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[1]/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[1]/div/label/span");
 	By enableCouponLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[3]/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[3]/div/label/span");
 	By enableSMSLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[4]/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[4]/div/label/span");
 	By enablecomboLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[5]/div/label/span");
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[5]/div/label/span");
 	By enablesignTestLocator = By
-			.xpath("/html/body/div[1]/div/section[2]/section/form/div[1]/div[4]/div[6]/div/label/span");
-	By submitButtonLocator = By.xpath("html/body/div[1]/div/section[2]/section/form/div[2]/button");
-
+			.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[6]/div/label/span");
+	By enableAuditLocator = By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[7]/div/label/span");
+	By enableAILocator = By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[8]/div/label/span");
+	By submitButtonLocator = By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/footer/button");
 	public WebElement getActivityNameTextField() {
 		return this.dr.findElement(activityNameLocator);
 	}
@@ -144,6 +145,12 @@ public class CreateActivityPage extends BasePage {
 	public WebElement getenablesignTestButton() {
 		return this.dr.findElement(enablesignTestLocator);
 	}
+	public WebElement getenableAuditLocator() {
+		return this.dr.findElement(enableAuditLocator);
+	}
+	public WebElement getenableAILocator() {
+		return this.dr.findElement(enableAILocator);
+	}
 	public WebElement getSubmitButton() {
 		return this.dr.findElement(submitButtonLocator);
 	}
@@ -175,6 +182,7 @@ public class CreateActivityPage extends BasePage {
 		this.getEndTimeTextField().sendKeys(activityEndTime);
 		Select activityquarterSelect = this.getactivityquarterSelect();
 		activityquarterSelect.selectByValue("2"); // 2-暑假班
+		
 		JavascriptExecutor js1 = (JavascriptExecutor) this.dr;
 		js1.executeScript("arguments[0].scrollIntoView(true);", this.getEnableSignupButton());
 		this.getEnableSignupButton().click();
@@ -183,6 +191,9 @@ public class CreateActivityPage extends BasePage {
 		this.getenableSMSButton().click();
 		this.getenablecomboButton().click();
 		this.getenablesignTestButton().click();
+		this.getenableAuditLocator().click();
+		//可AI对弈，默认未开，所以注释掉
+		//this.getenableAILocator().click();
 		JavascriptExecutor js2 = (JavascriptExecutor) this.dr;
 		js2.executeScript("arguments[0].scrollIntoView(true);", this.getSubmitButton());
 		this.getSubmitButton().click();

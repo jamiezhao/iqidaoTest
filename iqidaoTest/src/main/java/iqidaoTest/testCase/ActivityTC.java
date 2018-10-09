@@ -16,6 +16,7 @@ import iqidaoTest.Utils.xmlData;
 import iqidaoTest.adminPageObject.ActivitysListPage;
 import iqidaoTest.adminPageObject.AdminHomePage;
 import iqidaoTest.adminPageObject.AdminLoginPage;
+import iqidaoTest.adminPageObject.CreatNotification;
 import iqidaoTest.adminPageObject.CreateActivityPage;
 import iqidaoTest.adminPageObject.CreateSeasonPage;
 
@@ -51,7 +52,15 @@ public class ActivityTC {
 	String itemName = xmlData.getParamFromXml("itemName");
 	String itemStartTime = xmlData.getParamFromXml("itemStartTime");
 	String courseSyllabus = xmlData.getParamFromXml("courseSyllabus");
-
+	//创建AI
+	String AItime = xmlData.getParamFromXml("AItime");
+	String gamecount = xmlData.getParamFromXml("gamecount");
+	String gamelevel = xmlData.getParamFromXml("gamelevel");
+	String gamerul = xmlData.getParamFromXml("gamerul");
+	String ReportName = xmlData.getParamFromXml("ReportName");
+	String ReportStartTime = xmlData.getParamFromXml("ReportStartTime");
+	String ReportEndTime= xmlData.getParamFromXml("ReportEndTime");
+	String ReportSendTime=xmlData.getParamFromXml("ReportSendTime");
 	@BeforeTest
 	public void beforeTest() throws IOException {
 		System.setProperty("webdriver.chrome.driver", ChormeURL);
@@ -73,7 +82,7 @@ public class ActivityTC {
 	// 创建活动
 	@Test(priority = 0)
 	public void createActivity() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			String expectedResult = activityName[i];
 			CreateActivityPage createActivityPage = new CreateActivityPage(this.driver, createActivityUrl);
 			ActivitysListPage activitysListPage = createActivityPage.createActivity(activityName[i], teacherName,
@@ -96,8 +105,15 @@ public class ActivityTC {
 		Thread.sleep(2000);
 		createSeasonPage = createSeasonPage.addCourseItem(itemName, itemStartTime, courseSyllabus);
 		Thread.sleep(2000);
-	}
-
+		createSeasonPage = createSeasonPage.addAIItem(itemName, itemStartTime, activitysListUrl, AItime, gamecount, gamelevel, gamerul);
+		Thread.sleep(2000);
+		//添加通知管理信息
+		activityListPage.getActivityByName(activityName[0]);
+		this.driver.navigate().refresh();
+		String curl=this.driver.getCurrentUrl();
+		CreatNotification noticreate=new CreatNotification(this.driver, curl);
+		noticreate.CreateNotificationPage( ReportName,ReportStartTime, ReportEndTime, ReportSendTime);
+	}		
 	// 入学测只需添加试卷条目
 	@Test(groups = { "CreateSeason" }, priority = 2)
 	public void createSeasonAndCoursetest() throws InterruptedException {

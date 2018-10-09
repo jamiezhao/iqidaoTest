@@ -32,6 +32,10 @@ public class CreateSeasonPage extends BasePage{
 	By courseSyllabusLocator = By.id("upload_doc");
 	By itemSubmitButtonLocator = By.xpath(".//*[@id=\"add-course\"]/div[3]/button[2]");
 	By enabletestButton=By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/div/div[5]/div[6]/div/label/span");
+	By continuetime=By.xpath("//*[@id='add-course']/div[2]/div/div[4]/div/input");
+	By gamecountInput=By.xpath("//*[@id='addAi']/div[1]/div/input");
+	By gameLevelSelect=By.xpath("//*[@id='addAi']/div[2]/div/select");
+	By gamerulSelect=By.xpath("//*[@id='addAi']/div[3]/div/select");
 	By saveButton=By.xpath("/html/body/div[1]/div/section[2]/section[2]/form/footer/button");
 	public WebElement getAddSeasonButton() {
 		return this.dr.findElement(addSeasonButtonLocator);
@@ -75,16 +79,28 @@ public class CreateSeasonPage extends BasePage{
 	public WebElement getcourseSyllabusTextField() {
 		return this.dr.findElement(courseSyllabusLocator);
 	}
-	
+	public WebElement getcontinuetime() {
+		return this.dr.findElement(continuetime);
+	}
 	public WebElement getItemSubmitButton() {
 		return this.dr.findElement(itemSubmitButtonLocator);
 	}
 	public WebElement getenabletestButton() {
 		return this.dr.findElement(enabletestButton);
 	}	
+	public WebElement getgamerulSelect() {
+		return this.dr.findElement(gamerulSelect);
+	}
+	public WebElement getgameLevelSelect() {
+		return this.dr.findElement(gameLevelSelect);
+	}
+	public WebElement getgamecountInput() {
+		return this.dr.findElement(gamecountInput);
+	}
 	public WebElement getsaveButton() {
 		return this.dr.findElement(saveButton);
 	}
+	//*[@id="addAi"]/div[1]/div/input
 	public boolean findItemByName(String itemName) {
 		boolean flag = false;
 		WebElement table = this.dr.findElement(By.id("special-list"));
@@ -153,6 +169,7 @@ public class CreateSeasonPage extends BasePage{
 		}
 		return actualActivityName;
 	}
+	//添加课程条目
 	public CreateSeasonPage addCourseItem(String itemName, String itemStartTime, String courseSyllabus) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
@@ -178,7 +195,7 @@ public class CreateSeasonPage extends BasePage{
 		}
 	    return new CreateSeasonPage(this.dr, this.url);
 	}
-	
+	//添加考试条目
 	public CreateSeasonPage addExamItem(String itemName, String itemStartTime,String redirectPageUrl) {
 		//页面滚动定位到添加条目的按钮
 		JavascriptExecutor js = (JavascriptExecutor) this.dr;
@@ -201,8 +218,50 @@ public class CreateSeasonPage extends BasePage{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new CreateSeasonPage(this.dr, redirectPageUrl);
+		return new CreateSeasonPage(this.dr, this.url);
 	}
+	//添加对弈条目
+		public CreateSeasonPage addAIItem(String itemName, String itemStartTime,String redirectPageUrl,String AItime,String gamecount,String gamelevel,String gamerul) {
+			//页面滚动定位到添加条目的按钮
+			JavascriptExecutor js = (JavascriptExecutor) this.dr;
+//		    js.executeScript("arguments[0].scrollIntoView(true);", this.dr.findElement(By.linkText("添加条目")));
+			js.executeScript("document.getElementsByTagName('html')[0].scrollTop = 1200");
+		    this.getAddItemButton().click();
+		    this.getItemNameTextField().sendKeys(itemName);
+		    this.getItemStartTimeTextField().clear();
+		    this.getItemStartTimeTextField().sendKeys(itemStartTime);
+			Select select = new Select(this.getItemTypeSelect());
+		    select.selectByValue("2");
+		    try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		   /* this.getcontinuetime().clear();
+		    this.getcontinuetime().sendKeys(AItime);*/
+		    this.getgamecountInput().sendKeys(gamecount);
+			Select select1 = new Select(this.getgameLevelSelect());
+			select1.selectByValue(gamelevel);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Select select2 = new Select(this.getgamerulSelect());
+			select2.selectByValue(gamerul);
+			 try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+		    this.getItemSubmitButton().click();
+		    try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return new CreateSeasonPage(this.dr, redirectPageUrl);
+		}
 	//入学测活动关闭入学测按钮
 	public CreateSeasonPage Enableteseclose( ) {
 		this.getenabletestButton().click();
